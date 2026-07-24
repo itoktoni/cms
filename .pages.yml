@@ -1,4 +1,30 @@
+media:
+  input: public/uploads
+  output: /uploads
+
 content:
+  - name: navigation
+    label: Menu Navigasi
+    path: src/content/settings/navigation.json
+    type: file
+    fields:
+      - name: items
+        label: Menu Items
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Label
+            type: string
+            required: true
+          - name: url
+            label: URL
+            type: string
+            required: true
+          - name: highlight
+            label: Tombol Highlight
+            type: boolean
+
   - name: services
     label: Layanan
     path: src/content/services
@@ -18,6 +44,9 @@ content:
         label: Ikon (emoji)
         type: string
         required: true
+      - name: image
+        label: Gambar
+        type: image
       - name: order
         label: Urutan
         type: number
@@ -47,6 +76,9 @@ content:
       - name: author
         label: Penulis
         type: string
+      - name: image
+        label: Gambar Cover
+        type: image
       - name: body
         label: Konten
         type: rich-text

@@ -7,6 +7,7 @@ const services = defineCollection({
     title: z.string(),
     description: z.string(),
     icon: z.string(),
+    image: z.string().optional(),
     order: z.number().default(0),
   }),
 });
@@ -18,6 +19,7 @@ const articles = defineCollection({
     description: z.string(),
     date: z.string(),
     author: z.string().default('Admin'),
+    image: z.string().optional(),
   }),
 });
 
