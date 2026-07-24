@@ -1,0 +1,52 @@
+content:
+  - name: services
+    label: Layanan
+    path: src/content/services
+    type: collection
+    view:
+      fields: [title, icon, order]
+    fields:
+      - name: title
+        label: Judul Layanan
+        type: string
+        required: true
+      - name: description
+        label: Deskripsi Singkat
+        type: string
+        required: true
+      - name: icon
+        label: Ikon (emoji)
+        type: string
+        required: true
+      - name: order
+        label: Urutan
+        type: number
+      - name: body
+        label: Konten
+        type: rich-text
+
+  - name: articles
+    label: Artikel
+    path: src/content/articles
+    type: collection
+    view:
+      fields: [title, date, author]
+    fields:
+      - name: title
+        label: Judul Artikel
+        type: string
+        required: true
+      - name: description
+        label: Deskripsi Singkat
+        type: string
+        required: true
+      - name: date
+        label: Tanggal
+        type: date
+        required: true
+      - name: author
+        label: Penulis
+        type: string
+      - name: body
+        label: Konten
+        type: rich-text

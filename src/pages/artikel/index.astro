@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const articles = await getCollection('articles');
+articles.sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+---
+
+<BaseLayout title="Artikel">
+  <section class="bg-gradient-to-br from-primary to-primary-light py-16 md:py-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Artikel & Informasi</h1>
+      <p class="text-lg text-blue-100 max-w-2xl mx-auto">Pengetahuan seputar maintenance, kalibrasi, dan pengelolaan alat kesehatan.</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="space-y-8">
+        {articles.map(article => (
+          <a href={`/artikel/${article.id}`} class="group block bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all border border-gray-100 hover:border-secondary/30">
+            <div class="flex items-center gap-3 text-sm text-gray-500 mb-3">
+              <time>{new Date(article.data.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+              <span>•</span>
+              <span>{article.data.author}</span>
+            </div>
+            <h2 class="text-xl font-bold text-primary mb-2 group-hover:text-secondary transition-colors">{article.data.title}</h2>
+            <p class="text-gray-600 text-sm leading-relaxed">{article.data.description}</p>
+            <span class="mt-4 inline-flex items-center text-secondary font-medium text-sm">
+              Baca selengkapnya →
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
