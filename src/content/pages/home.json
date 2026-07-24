@@ -1,0 +1,74 @@
+{
+  "title": "Beranda",
+  "sections": {
+    "slider": {
+      "enabled": true,
+      "items": [
+        {
+          "title": "Jasa Kalibrasi Alat Kesehatan Terpercaya",
+          "subtitle": "Memastikan akurasi dan keselamatan pasien dengan layanan kalibrasi berstandar nasional & internasional.",
+          "button_text": "Konsultasi Gratis",
+          "button_url": "/kontak",
+          "image": ""
+        },
+        {
+          "title": "Preventive Maintenance Berkala",
+          "subtitle": "Perpanjang usia pakai alat kesehatan Anda dengan program maintenance terjadwal dari teknisi bersertifikasi.",
+          "button_text": "Lihat Layanan",
+          "button_url": "/layanan",
+          "image": ""
+        },
+        {
+          "title": "Laboratorium Terakreditasi KAN",
+          "subtitle": "Didukung laboratorium kalibrasi terakreditasi dan peralatan standar referensi terkini.",
+          "button_text": "Tentang Kami",
+          "button_url": "/tentang",
+          "image": ""
+        }
+      ]
+    },
+    "stats": {
+      "enabled": true,
+      "items": [
+        { "value": "500+", "label": "Klien Aktif" },
+        { "value": "15+", "label": "Tahun Pengalaman" },
+        { "value": "10.000+", "label": "Alat Dikalibrasi" },
+        { "value": "50+", "label": "Teknisi Tersertifikasi" }
+      ]
+    },
+    "why_us": {
+      "enabled": true,
+      "heading": "Mengapa Memilih Kami?",
+      "subheading": "Keunggulan yang membedakan kami dari penyedia jasa lainnya",
+      "items": [
+        {
+          "title": "Terakreditasi KAN",
+          "description": "Laboratorium kalibrasi kami terakreditasi Komite Akreditasi Nasional sesuai ISO 17025.",
+          "icon": "🏅"
+        },
+        {
+          "title": "Teknisi Bersertifikasi",
+          "description": "Seluruh teknisi kami memiliki sertifikasi kompetensi dari lembaga terakreditasi.",
+          "icon": "👨‍🔧"
+        },
+        {
+          "title": "Respons Cepat",
+          "description": "Tim kami siap merespons dalam 24 jam dan tersedia untuk layanan darurat.",
+          "icon": "⚡"
+        },
+        {
+          "title": "Cakupan Nasional",
+          "description": "Melayani rumah sakit dan klinik di seluruh Indonesia dengan cabang di 5 kota besar.",
+          "icon": "🌏"
+        }
+      ]
+    },
+    "cta": {
+      "enabled": true,
+      "heading": "Siap Memastikan Alat Kesehatan Anda Akurat?",
+      "description": "Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik.",
+      "button_text": "Hubungi Kami Sekarang",
+      "button_url": "/kontak"
+    }
+  }
+}

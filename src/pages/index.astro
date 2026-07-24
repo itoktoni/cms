@@ -1,211 +1,148 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import homeData from '../content/pages/home.json';
 
 const services = await getCollection('services');
+services.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+
+const { slider, stats, why_us, cta } = homeData.sections;
 ---
 
-<BaseLayout title="Beranda">
-  <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-primary via-primary-light to-primary overflow-hidden">
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-20 left-10 w-72 h-72 bg-secondary rounded-full blur-3xl"></div>
-      <div class="absolute bottom-10 right-10 w-96 h-96 bg-accent rounded-full blur-3xl"></div>
-    </div>
-    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <span class="inline-block px-4 py-1.5 bg-secondary/20 text-secondary rounded-full text-sm font-medium mb-6">
-            ✓ Tersertifikasi & Terakreditasi
-          </span>
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
-            Jasa Maintenance & <span class="text-secondary">Kalibrasi</span> Alat Kesehatan
-          </h1>
-          <p class="text-lg text-blue-100 mb-8 leading-relaxed max-w-lg">
-            Menjaga akurasi dan keandalan peralatan medis Anda dengan layanan kalibrasi dan 
-            pemeliharaan profesional sesuai standar nasional dan internasional.
-          </p>
-          <div class="flex flex-wrap gap-4">
-            <a href="/kontak" class="inline-flex items-center px-8 py-3.5 bg-secondary hover:bg-sky-600 text-white font-semibold rounded-xl transition-all shadow-lg shadow-secondary/30 hover:shadow-xl">
-              Konsultasi Gratis
-              <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-            </a>
-            <a href="/layanan" class="inline-flex items-center px-8 py-3.5 border-2 border-white/30 hover:border-white text-white font-semibold rounded-xl transition-all hover:bg-white/10">
-              Lihat Layanan
-            </a>
-          </div>
-        </div>
-        <div class="hidden md:flex justify-center">
-          <div class="relative">
-            <div class="w-80 h-80 bg-white/10 rounded-3xl backdrop-blur-sm border border-white/20 flex items-center justify-center">
-              <svg class="w-40 h-40 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
-            </div>
-            <div class="absolute -top-4 -right-4 w-24 h-24 bg-accent rounded-2xl flex items-center justify-center shadow-lg">
-              <div class="text-center text-white">
-                <div class="text-2xl font-bold">15+</div>
-                <div class="text-xs">Tahun</div>
-              </div>
-            </div>
-            <div class="absolute -bottom-4 -left-4 w-28 h-20 bg-secondary rounded-2xl flex items-center justify-center shadow-lg">
-              <div class="text-center text-white">
-                <div class="text-xl font-bold">500+</div>
-                <div class="text-xs">Klien RS</div>
+<BaseLayout title={homeData.title}>
+  <!-- Slider / Hero -->
+  {slider.enabled && (
+    <section class="relative overflow-hidden">
+      <div id="hero-slider" class="relative">
+        {slider.items.map((slide, i) => (
+          <div
+            class={`hero-slide ${i === 0 ? '' : 'hidden'} transition-opacity duration-700`}
+            style={slide.image ? `background-image: url('${slide.image}'); background-size: cover; background-position: center;` : ''}
+          >
+            <div class={`py-20 md:py-32 ${slide.image ? 'bg-primary/80' : 'bg-gradient-to-br from-primary via-primary-light to-secondary'}`}>
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">{slide.title}</h1>
+                <p class="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-10">{slide.subtitle}</p>
+                {slide.button_text && (
+                  <a href={slide.button_url || '/kontak'} class="inline-flex items-center px-8 py-4 bg-secondary hover:bg-sky-600 text-white font-semibold rounded-xl text-lg transition-all shadow-xl hover:shadow-2xl">
+                    {slide.button_text}
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                  </a>
+                )}
               </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
-    </div>
-  </section>
+      {slider.items.length > 1 && (
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+          {slider.items.map((_, i) => (
+            <button class={`slider-dot w-3 h-3 rounded-full transition-colors ${i === 0 ? 'bg-white' : 'bg-white/40'}`} data-index={i} aria-label={`Slide ${i + 1}`}></button>
+          ))}
+        </div>
+      )}
+    </section>
+  )}
 
   <!-- Stats -->
-  <section class="bg-white -mt-1">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-12 md:py-16">
-        <div class="text-center p-6 rounded-2xl bg-gray-50 hover:bg-blue-50 transition-colors">
-          <div class="text-3xl mb-2">🏆</div>
-          <div class="text-2xl md:text-3xl font-bold text-primary">15+</div>
-          <div class="text-sm text-gray-600 mt-1">Tahun Pengalaman</div>
-        </div>
-        <div class="text-center p-6 rounded-2xl bg-gray-50 hover:bg-blue-50 transition-colors">
-          <div class="text-3xl mb-2">🏥</div>
-          <div class="text-2xl md:text-3xl font-bold text-primary">500+</div>
-          <div class="text-sm text-gray-600 mt-1">Rumah Sakit & Klinik</div>
-        </div>
-        <div class="text-center p-6 rounded-2xl bg-gray-50 hover:bg-blue-50 transition-colors">
-          <div class="text-3xl mb-2">🔧</div>
-          <div class="text-2xl md:text-3xl font-bold text-primary">10.000+</div>
-          <div class="text-sm text-gray-600 mt-1">Alat Terkalibrasi</div>
-        </div>
-        <div class="text-center p-6 rounded-2xl bg-gray-50 hover:bg-blue-50 transition-colors">
-          <div class="text-3xl mb-2">⭐</div>
-          <div class="text-2xl md:text-3xl font-bold text-primary">99.8%</div>
-          <div class="text-sm text-gray-600 mt-1">Tingkat Kepuasan</div>
+  {stats.enabled && (
+    <section class="py-12 bg-white border-b border-gray-100">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          {stats.items.map(stat => (
+            <div>
+              <div class="text-3xl md:text-4xl font-extrabold text-primary">{stat.value}</div>
+              <div class="text-sm text-gray-500 mt-1">{stat.label}</div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
-  <!-- Services -->
+  <!-- Services from collection -->
   <section class="py-16 md:py-24 bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12 md:mb-16">
+      <div class="text-center mb-12">
         <span class="text-secondary font-semibold text-sm uppercase tracking-wider">Layanan Kami</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-primary mt-2">Solusi Lengkap untuk Alat Kesehatan</h2>
-        <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Kami menyediakan layanan komprehensif untuk memastikan peralatan medis Anda selalu dalam kondisi optimal.</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-primary mt-2">Solusi Lengkap Alat Kesehatan</h2>
       </div>
       <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map(service => (
           <a href={`/layanan/${service.id}`} class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-secondary/30">
+            {service.data.image && (
+              <img src={service.data.image} alt={service.data.title} class="w-full h-40 object-cover rounded-xl mb-5" />
+            )}
             <div class="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-secondary/20 transition-colors">
               <span class="text-2xl">{service.data.icon}</span>
             </div>
             <h3 class="text-xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">{service.data.title}</h3>
             <p class="text-gray-600 text-sm leading-relaxed">{service.data.description}</p>
-            <div class="mt-5 flex items-center text-secondary font-medium text-sm opacity-0 group-hover:opacity-100 transition-opacity">
-              Selengkapnya
-              <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </div>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Why Choose Us -->
-  <section class="py-16 md:py-24 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-2 gap-16 items-center">
-        <div>
-          <span class="text-secondary font-semibold text-sm uppercase tracking-wider">Mengapa Kami</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-primary mt-2 mb-6">Mitra Terpercaya untuk Peralatan Medis Anda</h2>
-          <p class="text-gray-600 mb-8 leading-relaxed">
-            Dengan pengalaman lebih dari 15 tahun, kami telah menjadi pilihan utama ratusan rumah sakit 
-            dan klinik di seluruh Indonesia untuk kebutuhan maintenance dan kalibrasi alat kesehatan.
-          </p>
-          <div class="space-y-5">
-            <div class="flex gap-4">
-              <div class="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div>
-                <h4 class="font-semibold text-primary">Tersertifikasi KAN</h4>
-                <p class="text-sm text-gray-600 mt-1">Laboratorium kalibrasi terakreditasi oleh Komite Akreditasi Nasional (KAN).</p>
-              </div>
-            </div>
-            <div class="flex gap-4">
-              <div class="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div>
-                <h4 class="font-semibold text-primary">Teknisi Bersertifikat</h4>
-                <p class="text-sm text-gray-600 mt-1">Tim teknisi profesional dengan sertifikasi resmi dan pelatihan berkala.</p>
-              </div>
-            </div>
-            <div class="flex gap-4">
-              <div class="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div>
-                <h4 class="font-semibold text-primary">Respons Cepat</h4>
-                <p class="text-sm text-gray-600 mt-1">Waktu respons maksimal 24 jam untuk permintaan darurat di area layanan.</p>
-              </div>
-            </div>
-            <div class="flex gap-4">
-              <div class="w-8 h-8 bg-accent/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-              </div>
-              <div>
-                <h4 class="font-semibold text-primary">Garansi Layanan</h4>
-                <p class="text-sm text-gray-600 mt-1">Setiap layanan dilengkapi garansi dan sertifikat kalibrasi yang sah.</p>
-              </div>
-            </div>
-          </div>
+  <!-- Why Us -->
+  {why_us.enabled && (
+    <section class="py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <span class="text-secondary font-semibold text-sm uppercase tracking-wider">Keunggulan</span>
+          <h2 class="text-3xl md:text-4xl font-bold text-primary mt-2">{why_us.heading}</h2>
+          {why_us.subheading && <p class="text-gray-600 mt-3 max-w-2xl mx-auto">{why_us.subheading}</p>}
         </div>
-        <div class="bg-gradient-to-br from-blue-50 to-emerald-50 rounded-3xl p-8 md:p-12">
-          <div class="grid grid-cols-2 gap-6">
-            <div class="bg-white rounded-2xl p-5 shadow-sm text-center">
-              <div class="text-3xl mb-3">📋</div>
-              <h4 class="font-semibold text-primary text-sm">Sertifikat KAN</h4>
-              <p class="text-xs text-gray-500 mt-1">Terakreditasi resmi</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {why_us.items.map(item => (
+            <div class="text-center p-6">
+              <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <span class="text-3xl">{item.icon}</span>
+              </div>
+              <h4 class="text-lg font-bold text-primary mb-2">{item.title}</h4>
+              <p class="text-gray-600 text-sm">{item.description}</p>
             </div>
-            <div class="bg-white rounded-2xl p-5 shadow-sm text-center">
-              <div class="text-3xl mb-3">⏱️</div>
-              <h4 class="font-semibold text-primary text-sm">Respons 24 Jam</h4>
-              <p class="text-xs text-gray-500 mt-1">Layanan darurat</p>
-            </div>
-            <div class="bg-white rounded-2xl p-5 shadow-sm text-center">
-              <div class="text-3xl mb-3">🛡️</div>
-              <h4 class="font-semibold text-primary text-sm">Garansi</h4>
-              <p class="text-xs text-gray-500 mt-1">Jaminan kualitas</p>
-            </div>
-            <div class="bg-white rounded-2xl p-5 shadow-sm text-center">
-              <div class="text-3xl mb-3">📊</div>
-              <h4 class="font-semibold text-primary text-sm">Laporan Digital</h4>
-              <p class="text-xs text-gray-500 mt-1">Dokumentasi lengkap</p>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
 
   <!-- CTA -->
-  <section class="py-16 md:py-24 bg-gradient-to-r from-primary to-primary-light">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Butuh Kalibrasi atau Maintenance?</h2>
-      <p class="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">Hubungi kami untuk konsultasi gratis. Tim ahli kami siap membantu menjaga peralatan medis Anda tetap akurat dan andal.</p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="/kontak" class="inline-flex items-center px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-gray-100 transition-colors shadow-lg">
-          Hubungi Kami Sekarang
-        </a>
-        <a href="https://wa.me/6281234567890" class="inline-flex items-center px-8 py-4 bg-accent text-white font-bold rounded-xl hover:bg-emerald-600 transition-colors shadow-lg" target="_blank" rel="noopener">
-          <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          WhatsApp
+  {cta.enabled && (
+    <section class="py-16 md:py-24 bg-gradient-to-br from-primary to-primary-light">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">{cta.heading}</h2>
+        <p class="text-lg text-blue-100 mb-8">{cta.description}</p>
+        <a href={cta.button_url || '/kontak'} class="inline-flex items-center px-8 py-4 bg-secondary hover:bg-sky-600 text-white font-semibold rounded-xl text-lg transition-all shadow-xl">
+          {cta.button_text}
         </a>
       </div>
-    </div>
-  </section>
+    </section>
+  )}
+
+  <!-- Slider Script -->
+  <script>
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.slider-dot');
+    if (slides.length > 1) {
+      let current = 0;
+      function showSlide(n: number) {
+        slides.forEach((s, i) => {
+          (s as HTMLElement).classList.toggle('hidden', i !== n);
+        });
+        dots.forEach((d, i) => {
+          (d as HTMLElement).classList.toggle('bg-white', i === n);
+          (d as HTMLElement).classList.toggle('bg-white/40', i !== n);
+        });
+        current = n;
+      }
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          showSlide(Number((dot as HTMLElement).dataset.index));
+        });
+      });
+      setInterval(() => showSlide((current + 1) % slides.length), 5000);
+    }
+  </script>
 </BaseLayout>

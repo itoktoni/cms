@@ -1,0 +1,41 @@
+{
+  "title": "Tentang Kami",
+  "sections": {
+    "hero": {
+      "enabled": true,
+      "heading": "Tentang MedTech Kalibra",
+      "subheading": "Lebih dari 15 tahun mengabdi untuk keselamatan pasien melalui akurasi alat kesehatan."
+    },
+    "history": {
+      "enabled": true,
+      "heading": "Berdiri Sejak 2010",
+      "description": "MedTech Kalibra didirikan dengan visi menjadi mitra terpercaya bagi fasilitas kesehatan di Indonesia dalam menjaga akurasi dan keandalan peralatan medis. Bermula dari tim kecil yang terdiri dari para insinyur biomedis berpengalaman, kini kami telah berkembang menjadi perusahaan dengan lebih dari 50 teknisi tersertifikasi.",
+      "milestones": [
+        { "year": "2010", "title": "Pendirian Perusahaan", "description": "Dimulai dengan 5 teknisi di Jakarta" },
+        { "year": "2014", "title": "Akreditasi KAN", "description": "Laboratorium kalibrasi terakreditasi" },
+        { "year": "2018", "title": "Ekspansi Nasional", "description": "Cabang di 5 kota besar Indonesia" },
+        { "year": "2026", "title": "500+ Klien Aktif", "description": "Melayani RS dan klinik seluruh Indonesia" }
+      ]
+    },
+    "vision_mission": {
+      "enabled": true,
+      "vision": "Menjadi perusahaan terdepan di Indonesia dalam penyediaan jasa maintenance dan kalibrasi alat kesehatan yang berkualitas, akurat, dan terpercaya demi mendukung peningkatan mutu pelayanan kesehatan nasional.",
+      "missions": [
+        "Menyediakan layanan kalibrasi sesuai standar nasional dan internasional",
+        "Mengembangkan SDM yang kompeten dan profesional",
+        "Memberikan respons cepat dan solusi tepat bagi klien",
+        "Berkontribusi pada keselamatan pasien melalui akurasi alat"
+      ]
+    },
+    "certifications": {
+      "enabled": true,
+      "heading": "Dipercaya Karena Terstandarisasi",
+      "items": [
+        { "title": "KAN", "subtitle": "Komite Akreditasi Nasional", "icon": "🏅" },
+        { "title": "ISO 17025", "subtitle": "Laboratorium Pengujian", "icon": "📜" },
+        { "title": "ISO 9001", "subtitle": "Manajemen Mutu", "icon": "📋" },
+        { "title": "Kemenkes RI", "subtitle": "Izin Resmi", "icon": "🏥" }
+      ]
+    }
+  }
+}

@@ -25,6 +25,208 @@ content:
             label: Tombol Highlight
             type: boolean
 
+  - name: page-home
+    label: "Halaman: Beranda"
+    path: src/content/pages/home.json
+    type: file
+    fields:
+      - name: title
+        label: Judul Halaman
+        type: string
+      - name: sections
+        label: Sections
+        type: object
+        fields:
+          - name: slider
+            label: Slider / Hero
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: items
+                label: Slide Items
+                type: object
+                list: true
+                fields:
+                  - name: title
+                    label: Judul
+                    type: string
+                    required: true
+                  - name: subtitle
+                    label: Subtitle
+                    type: string
+                  - name: button_text
+                    label: Teks Tombol
+                    type: string
+                  - name: button_url
+                    label: URL Tombol
+                    type: string
+                  - name: image
+                    label: Gambar Background
+                    type: image
+          - name: stats
+            label: Statistik
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: items
+                label: Angka Statistik
+                type: object
+                list: true
+                fields:
+                  - name: value
+                    label: Angka
+                    type: string
+                    required: true
+                  - name: label
+                    label: Label
+                    type: string
+                    required: true
+          - name: why_us
+            label: Keunggulan
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: heading
+                label: Judul Section
+                type: string
+              - name: subheading
+                label: Sub Judul
+                type: string
+              - name: items
+                label: Keunggulan Items
+                type: object
+                list: true
+                fields:
+                  - name: title
+                    label: Judul
+                    type: string
+                    required: true
+                  - name: description
+                    label: Deskripsi
+                    type: string
+                  - name: icon
+                    label: Ikon (emoji)
+                    type: string
+          - name: cta
+            label: Call to Action
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: heading
+                label: Judul
+                type: string
+              - name: description
+                label: Deskripsi
+                type: string
+              - name: button_text
+                label: Teks Tombol
+                type: string
+              - name: button_url
+                label: URL Tombol
+                type: string
+
+  - name: page-about
+    label: "Halaman: Tentang Kami"
+    path: src/content/pages/about.json
+    type: file
+    fields:
+      - name: title
+        label: Judul Halaman
+        type: string
+      - name: sections
+        label: Sections
+        type: object
+        fields:
+          - name: hero
+            label: Hero
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: heading
+                label: Judul
+                type: string
+              - name: subheading
+                label: Sub Judul
+                type: string
+          - name: history
+            label: Sejarah
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: heading
+                label: Judul
+                type: string
+              - name: description
+                label: Deskripsi
+                type: string
+              - name: milestones
+                label: Milestone
+                type: object
+                list: true
+                fields:
+                  - name: year
+                    label: Tahun
+                    type: string
+                    required: true
+                  - name: title
+                    label: Judul
+                    type: string
+                    required: true
+                  - name: description
+                    label: Deskripsi
+                    type: string
+          - name: vision_mission
+            label: Visi & Misi
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: vision
+                label: Visi
+                type: string
+              - name: missions
+                label: Misi
+                type: string
+                list: true
+          - name: certifications
+            label: Sertifikasi
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: heading
+                label: Judul
+                type: string
+              - name: items
+                label: Sertifikasi Items
+                type: object
+                list: true
+                fields:
+                  - name: title
+                    label: Nama
+                    type: string
+                    required: true
+                  - name: subtitle
+                    label: Keterangan
+                    type: string
+                  - name: icon
+                    label: Ikon (emoji)
+                    type: string
+
   - name: services
     label: Layanan
     path: src/content/services
