@@ -7,138 +7,135 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'MedTech Kalibra - Jasa Maintenance & Kalibrasi Alat Kesehatan Terpercaya' } = Astro.props;
+const { title, description = 'ECM - PT. Elsyahfi Calibratech Mandiri, Institusi Pengujian Fasilitas Kesehatan (IPFK) di Sumatera Barat' } = Astro.props;
 const navItems = navigation.items;
 ---
 
 <!doctype html>
-<html lang="id">
+<html class="scroll-smooth" lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="keywords" content="ECM, PT. Elsyahfi Calibratech Mandiri, Kalibrasi alat kesehatan, IPFK, Sumatera Barat, Payakumbuh" />
+    <meta name="author" content="ECM" />
+    <meta property="og:title" content={`${title} | ECM`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://ecm.co.id/assets/img/ecm.png" />
+    <meta property="og:url" content="https://ecm.co.id" />
+    <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <title>{title} | MedTech Kalibra</title>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <title>{title} | ECM</title>
   </head>
-  <body class="font-sans text-gray-800 bg-white">
-    <header class="bg-primary text-white sticky top-0 z-50 shadow-lg">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16 md:h-20">
-          <!-- Logo -->
-          <a href="/" class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
-            </div>
-            <div>
-              <span class="text-xl font-bold tracking-tight">MedTech Kalibra</span>
-              <span class="hidden sm:block text-xs text-blue-200">Maintenance & Kalibrasi Alat Kesehatan</span>
-            </div>
-          </a>
-
-          <!-- Desktop Navigation -->
-          <nav class="hidden md:flex items-center gap-1">
-            {navItems.map(item => (
-              <a href={item.url} class={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${item.highlight ? 'bg-secondary hover:bg-sky-600 ml-2' : 'hover:bg-primary-light'}`}>{item.label}</a>
-            ))}
-          </nav>
-
-          <!-- Mobile Menu Button -->
-          <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-primary-light transition-colors" aria-label="Menu">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-          </button>
+  <body class="bg-background text-on-surface font-body-md selection:bg-secondary-container/30">
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm transition-all duration-300" id="main-nav">
+      <div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+        <div class="flex items-center gap-3">
+          <img alt="ECM Logo" class="h-10 w-auto" src="https://ecm.co.id/assets/img/ecm.png" />
+          <span class="font-headline-md text-headline-md font-bold text-primary hidden">ECM</span>
         </div>
-
-        <!-- Mobile Navigation -->
-        <nav id="mobile-menu" class="hidden md:hidden pb-4">
+        <div class="hidden md:flex items-center space-x-8">
           {navItems.map(item => (
-            <a href={item.url} class="block px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary-light transition-colors">{item.label}</a>
+            <a
+              href={item.url}
+              class={`font-label-md text-label-md ${item.highlight ? 'text-secondary border-b-2 border-secondary pb-1' : 'text-on-surface-variant'} hover:text-primary transition-colors duration-300`}
+            >{item.label}</a>
           ))}
-        </nav>
+        </div>
+        <div class="flex items-center gap-6">
+          <button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">search</button>
+          <a href="/kontak" class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-label-md hover:opacity-90 active:scale-95 transition-all">Order Sekarang</a>
+        </div>
       </div>
-    </header>
+    </nav>
 
     <main>
       <slot />
     </main>
 
-    <footer class="bg-gray-900 text-gray-300">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <!-- Company Info -->
-          <div class="md:col-span-2">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                </svg>
-              </div>
-              <span class="text-xl font-bold text-white">MedTech Kalibra</span>
-            </div>
-            <p class="text-sm leading-relaxed mb-4 max-w-md">
-              Perusahaan terpercaya dalam bidang maintenance, perbaikan, dan kalibrasi alat kesehatan. 
-              Kami memastikan peralatan medis Anda berfungsi dengan akurat dan aman sesuai standar yang berlaku.
-            </p>
-            <div class="flex gap-4">
-              <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-secondary transition-colors" aria-label="WhatsApp">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              </a>
-              <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-secondary transition-colors" aria-label="Email">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              </a>
-              <a href="#" class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-secondary transition-colors" aria-label="Instagram">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-              </a>
-            </div>
+    <!-- Footer -->
+    <footer class="bg-[#007A4D] py-24 text-white">
+      <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-gutter">
+        <div class="md:col-span-1">
+          <div class="flex items-center gap-3 mb-8">
+            <img alt="ECM Logo" class="h-8 w-auto brightness-0 invert" src="https://ecm.co.id/assets/img/ecm.png" />
           </div>
-
-          <!-- Quick Links -->
-          <div>
-            <h4 class="text-white font-semibold mb-4">Navigasi</h4>
-            <ul class="space-y-2 text-sm">
-              {navItems.map(item => (
-                <li><a href={item.url} class="hover:text-secondary transition-colors">{item.label}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <!-- Contact Info -->
-          <div>
-            <h4 class="text-white font-semibold mb-4">Kontak</h4>
-            <ul class="space-y-3 text-sm">
-              <li class="flex items-start gap-2">
-                <svg class="w-5 h-5 mt-0.5 shrink-0 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                <span>Jl. Kesehatan No. 123, Jakarta Selatan 12345</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-5 h-5 shrink-0 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                <span>(021) 1234-5678</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <svg class="w-5 h-5 shrink-0 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                <span>info@medtechkalibra.co.id</span>
-              </li>
-            </ul>
+          <p class="text-white/70 font-body-md mb-8">PT. Elsyahfi Calibratech Mandiri adalah Institusi Pengujian Fasilitas Kesehatan (IPFK) di Sumatera Barat yang berdiri sejak tahun 2018.</p>
+          <div class="flex gap-4">
+            <a href="https://www.instagram.com/ecm.elsyahfi/" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-xl">share</span>
+            </a>
+            <a href="mailto:ecm.pwk@gmail.com" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-xl">mail</span>
+            </a>
+            <a href="https://wa.me/6285263339098" target="_blank" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-xl">call</span>
+            </a>
           </div>
         </div>
-
-        <div class="border-t border-gray-800 mt-10 pt-8 text-center text-sm">
-          <p>&copy; {new Date().getFullYear()} MedTech Kalibra. Hak cipta dilindungi.</p>
+        <div>
+          <h5 class="text-secondary-container font-headline-md mb-8">Layanan</h5>
+          <ul class="space-y-4">
+            <li><a class="text-white/70 font-label-md hover:text-white transition-colors" href="/layanan">Kalibrasi Alat Kesehatan</a></li>
+            <li><a class="text-white/70 font-label-md hover:text-white transition-colors" href="/layanan">Inspeksi Preventive</a></li>
+            <li><a class="text-white/70 font-label-md hover:text-white transition-colors" href="/layanan">Konsultasi Teknis</a></li>
+            <li><a class="text-white/70 font-label-md hover:text-white transition-colors" href="/kontak">Verifikasi Sertifikat</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-secondary-container font-headline-md mb-8">Perusahaan</h5>
+          <ul class="space-y-4">
+            <li><a class="text-white/70 font-label-md hover:text-white transition-colors" href="/tentang">Tentang Kami</a></li>
+            <li><a class="text-white/70 font-label-md hover:text-white transition-colors" href="/artikel">Berita</a></li>
+            <li><a class="text-white/70 font-label-md hover:text-white transition-colors" href="/tentang">Sertifikat Akreditasi</a></li>
+            <li><a class="text-white/70 font-label-md hover:text-white transition-colors" href="/kontak">Hubungi Kami</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-secondary-container font-headline-md mb-8">Kantor & Lab</h5>
+          <ul class="space-y-4">
+            <li><span class="text-white/70 font-label-md flex items-start gap-2">
+              <span class="material-symbols-outlined text-sm mt-0.5">location_on</span>
+              Jl. Perkutut Komp. Perumahan Nuansa Mandiri No B4, Payakumbuh - Sumatera Barat
+            </span></li>
+            <li><a class="text-white/70 font-label-md hover:text-white transition-colors" href="https://wa.me/6285263339098" target="_blank">+62 852 6333 9098</a></li>
+            <li><a class="text-white/70 font-label-md hover:text-white transition-colors" href="mailto:ecm.pwk@gmail.com">ecm.pwk@gmail.com</a></li>
+            <li><span class="text-white/70 font-label-md">IPFK Terakreditasi KAN</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="max-w-7xl mx-auto px-8 mt-24 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+        <span class="text-label-sm text-white/40">&copy; {new Date().getFullYear()} PT. Elsyahfi Calibratech Mandiri. All Rights Reserved.</span>
+        <div class="flex gap-8 items-center">
+          <span class="text-label-sm text-white/40 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span> Systems Operational
+          </span>
+          <span class="text-label-sm text-white/40">HQ: Payakumbuh, Sumatera Barat</span>
         </div>
       </div>
     </footer>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/6285263339098" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform" aria-label="Chat WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    </a>
+
     <script>
-      const menuBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      menuBtn?.addEventListener('click', () => {
-        mobileMenu?.classList.toggle('hidden');
+      window.addEventListener('scroll', () => {
+        const nav = document.getElementById('main-nav');
+        if (!nav) return;
+        if (window.scrollY > 50) {
+          nav.classList.add('py-2', 'shadow-md');
+          nav.classList.remove('py-4', 'shadow-sm');
+        } else {
+          nav.classList.add('py-4', 'shadow-sm');
+          nav.classList.remove('py-2', 'shadow-md');
+        }
       });
     </script>
   </body>

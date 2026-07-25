@@ -6,42 +6,58 @@ import homeData from '../content/pages/home.json';
 const services = await getCollection('services');
 services.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 
-const { slider, stats, why_us, cta } = homeData.sections;
+const { slider, stats, certifications, verification, services: servicesConfig, advantages, news, cta, clients } = homeData.sections;
 ---
 
 <BaseLayout title={homeData.title}>
-  <!-- Slider / Hero -->
+  <!-- Hero Section Fullscreen Slider -->
   {slider.enabled && (
-    <section class="relative overflow-hidden">
-      <div id="hero-slider" class="relative">
+    <div class="hero-main-slider">
+      <div class="hs-track">
         {slider.items.map((slide, i) => (
-          <div
-            class={`hero-slide ${i === 0 ? '' : 'hidden'} transition-opacity duration-700`}
-            style={slide.image ? `background-image: url('${slide.image}'); background-size: cover; background-position: center;` : ''}
-          >
-            <div class={`py-20 md:py-32 ${slide.image ? 'bg-primary/80' : 'bg-gradient-to-br from-primary via-primary-light to-secondary'}`}>
-              <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">{slide.title}</h1>
-                <p class="text-lg md:text-xl text-blue-100 max-w-3xl mx-auto mb-10">{slide.subtitle}</p>
-                {slide.button_text && (
-                  <a href={slide.button_url || '/kontak'} class="inline-flex items-center px-8 py-4 bg-secondary hover:bg-sky-600 text-white font-semibold rounded-xl text-lg transition-all shadow-xl hover:shadow-2xl">
-                    {slide.button_text}
-                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                  </a>
+          <div class={`hs-slide ${i === 0 ? 'active' : ''}`}>
+            <div class="absolute inset-0 z-0">
+              {slide.image ? (
+                <img src={slide.image} alt={slide.badge} class="w-full h-full object-cover" />
+              ) : (
+                <div class="w-full h-full emerald-gradient"></div>
+              )}
+              <div class="absolute inset-0 bg-gradient-to-r from-background/95 via-background/60 to-transparent z-10"></div>
+            </div>
+            <div class="relative z-20 max-w-7xl mx-auto px-4 md:px-8 w-full">
+              <div class="hs-content max-w-2xl glass-card p-6 md:p-12 rounded-xl">
+                {slide.badge && (
+                  <span class="font-label-md text-primary tracking-[0.2em] uppercase mb-4 block">{slide.badge}</span>
                 )}
+                <h1 class="font-headline-xl text-headline-xl text-on-surface mb-6 leading-tight">{slide.title}</h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-10">{slide.subtitle}</p>
+                <div class="flex flex-wrap gap-4">
+                  {slide.button_text && (
+                    <a href={slide.button_url || '/kontak'} class="bg-primary text-on-primary px-6 md:px-8 py-3 md:py-4 rounded-lg font-label-md text-base md:text-lg flex items-center gap-2 hover:shadow-lg transition-all group">
+                      {slide.button_text} <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </a>
+                  )}
+                  {slider.items.length > 1 && (
+                    <button class="border border-outline px-6 md:px-8 py-3 md:py-4 rounded-lg font-label-md text-base md:text-lg hover:bg-surface-container transition-all">Layanan Kami</button>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
       {slider.items.length > 1 && (
-        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-10">
-          {slider.items.map((_, i) => (
-            <button class={`slider-dot w-3 h-3 rounded-full transition-colors ${i === 0 ? 'bg-white' : 'bg-white/40'}`} data-index={i} aria-label={`Slide ${i + 1}`}></button>
-          ))}
-        </div>
+        <>
+          <button class="hs-arrow hs-prev" aria-label="Prev"><span class="material-symbols-outlined text-on-surface">chevron_left</span></button>
+          <button class="hs-arrow hs-next" aria-label="Next"><span class="material-symbols-outlined text-on-surface">chevron_right</span></button>
+          <div class="hs-dots">
+            {slider.items.map((_, i) => (
+              <span class={`hs-dot ${i === 0 ? 'active' : ''}`} data-slide={i}></span>
+            ))}
+          </div>
+        </>
       )}
-    </section>
+    </div>
   )}
 
   <!-- Stats -->
@@ -60,47 +76,29 @@ const { slider, stats, why_us, cta } = homeData.sections;
     </section>
   )}
 
-  <!-- Services from collection -->
-  <section class="py-16 md:py-24 bg-gray-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <span class="text-secondary font-semibold text-sm uppercase tracking-wider">Layanan Kami</span>
-        <h2 class="text-3xl md:text-4xl font-bold text-primary mt-2">Solusi Lengkap Alat Kesehatan</h2>
-      </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map(service => (
-          <a href={`/layanan/${service.id}`} class="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-secondary/30">
-            {service.data.image && (
-              <img src={service.data.image} alt={service.data.title} class="w-full h-40 object-cover rounded-xl mb-5" />
-            )}
-            <div class="w-14 h-14 bg-secondary/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-secondary/20 transition-colors">
-              <span class="text-2xl">{service.data.icon}</span>
-            </div>
-            <h3 class="text-xl font-bold text-primary mb-3 group-hover:text-secondary transition-colors">{service.data.title}</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">{service.data.description}</p>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Why Us -->
-  {why_us.enabled && (
-    <section class="py-16 md:py-24">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-12">
-          <span class="text-secondary font-semibold text-sm uppercase tracking-wider">Keunggulan</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-primary mt-2">{why_us.heading}</h2>
-          {why_us.subheading && <p class="text-gray-600 mt-3 max-w-2xl mx-auto">{why_us.subheading}</p>}
+  <!-- Certifications Section -->
+  {certifications.enabled && (
+    <section class="py-24 bg-surface-container-low">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-16">
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">{certifications.heading}</h2>
         </div>
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {why_us.items.map(item => (
-            <div class="text-center p-6">
-              <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <span class="text-3xl">{item.icon}</span>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {certifications.items.map(cert => (
+            <div class="glass-card p-8 rounded-xl flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+              <div class="absolute inset-0 gold-shimmer opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div class="w-24 h-24 mb-6">
+                <div class="w-full h-full rounded-full bg-primary-container/10 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+                </div>
               </div>
-              <h4 class="text-lg font-bold text-primary mb-2">{item.title}</h4>
-              <p class="text-gray-600 text-sm">{item.description}</p>
+              <h3 class="font-headline-md text-headline-md mb-2">{cert.title}</h3>
+              <p class="text-on-surface-variant font-body-md">{cert.description}</p>
+              {cert.link_text && (
+                <div class="mt-6 text-secondary-container flex items-center gap-2 font-label-md">
+                  {cert.link_text} <span class="material-symbols-outlined text-sm">open_in_new</span>
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -108,41 +106,359 @@ const { slider, stats, why_us, cta } = homeData.sections;
     </section>
   )}
 
-  <!-- CTA -->
+  <!-- Verification Tool -->
+  {verification.enabled && (
+    <section class="py-24 bg-[#007A4D] relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+      </div>
+      <div class="max-w-4xl mx-auto px-8 relative z-10">
+        <div class="text-center mb-12">
+          <span class="font-label-md text-secondary-container tracking-widest uppercase block mb-2">{verification.badge}</span>
+          <h2 class="font-headline-lg text-headline-lg text-white">{verification.heading}</h2>
+          <p class="text-white/80 mt-4 max-w-lg mx-auto">{verification.description}</p>
+        </div>
+        <div class="glass-dark p-2 rounded-2xl flex flex-col md:flex-row items-stretch gap-2 border-white/20">
+          <div class="flex-grow flex items-center px-6 py-4 gap-4">
+            <span class="material-symbols-outlined text-secondary-container text-3xl">qr_code_scanner</span>
+            <input
+              class="w-full bg-transparent border-none text-white focus:ring-0 text-lg placeholder:text-white/40"
+              placeholder={verification.placeholder}
+              type="text"
+            />
+          </div>
+          <button class="bg-secondary-container text-on-secondary-container px-10 py-4 rounded-xl font-headline-md flex items-center justify-center gap-3 hover:bg-secondary-fixed-dim transition-all shadow-lg shadow-black/10">
+            {verification.button_text}
+          </button>
+        </div>
+        {verification.features && (
+          <div class="flex justify-center gap-8 mt-10">
+            {verification.features.map(feat => (
+              <div class="flex items-center gap-2 text-white/70 text-label-sm">
+                <span class="material-symbols-outlined text-sm text-secondary-container">{feat.icon}</span>
+                {feat.label}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- Clinical Solutions Ecosystem (Services) -->
+  {servicesConfig.enabled && (
+    <section class="py-24 bg-surface-container-low">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <div class="max-w-2xl">
+            <div class="w-12 h-1 bg-secondary-container mb-6"></div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{servicesConfig.heading}</h2>
+            <p class="text-on-surface-variant text-body-lg">{servicesConfig.description}</p>
+          </div>
+          {servicesConfig.link_text && (
+            <a class="text-primary font-label-md font-bold inline-flex items-center gap-2 hover:gap-3 transition-all shrink-0" href={servicesConfig.link_url || '/layanan'}>
+              {servicesConfig.link_text} <span class="material-symbols-outlined">arrow_right_alt</span>
+            </a>
+          )}
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, idx) => {
+            const icons = ['monitor_heart', 'radiology', 'medical_services'];
+            const icon = service.data.icon || icons[idx] || 'medical_services';
+            return (
+              <a href={`/layanan/${service.id}`} class="bg-white rounded-xl p-8 border border-outline-variant/30 hover:shadow-xl transition-all group block">
+                <div class="w-14 h-14 bg-surface-container-low text-primary flex items-center justify-center rounded-lg mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                  <span class="material-symbols-outlined text-[32px]">{icon}</span>
+                </div>
+                <h3 class="font-headline-md text-headline-md text-on-surface mb-4">{service.data.title}</h3>
+                <p class="text-on-surface-variant text-[15px] mb-6 leading-relaxed">{service.data.description}</p>
+                <div class="h-px bg-outline-variant/30 mb-6"></div>
+                <ul class="space-y-3 font-body-md text-[13px] text-outline">
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-secondary-container rounded-full"></span> Informasi Lengkap</li>
+                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-secondary-container rounded-full"></span> Hubungi Kami</li>
+                </ul>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Advantages Section (Competency Slider) -->
+  {advantages.enabled && advantages.items.length > 0 && (
+    <section class="py-32 bg-background">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <div class="max-w-2xl">
+            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{advantages.heading}</h2>
+            <p class="text-on-surface-variant text-body-lg">{advantages.description}</p>
+          </div>
+          <div class="cmp-nav shrink-0">
+            <button class="cmp-btn cmp-prev" aria-label="Prev"><span class="material-symbols-outlined text-on-surface">chevron_left</span></button>
+            <button class="cmp-btn cmp-next" aria-label="Next"><span class="material-symbols-outlined text-on-surface">chevron_right</span></button>
+          </div>
+        </div>
+        <div class="cmp-slid">
+          <div style="overflow:hidden;">
+            <div class="cmp-track">
+              {advantages.items.map(item => (
+                <div class="cmp-item">
+                  <div class="group rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <div class="h-48 overflow-hidden relative emerald-gradient flex items-center justify-center">
+                      <span class="material-symbols-outlined text-6xl text-white/30" style="font-variation-settings: 'FILL' 1;">{item.icon}</span>
+                    </div>
+                    <div class="p-6">
+                      <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center shrink-0">
+                          <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">{item.icon}</span>
+                        </div>
+                        <h4 class="font-headline-md text-headline-md group-hover:text-primary transition-colors">{item.title}</h4>
+                      </div>
+                      <p class="text-on-surface-variant text-sm">{item.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="cmp-dots">
+          {advantages.items.map((_, i) => (
+            <span class={`cmp-dot ${i === 0 ? 'active' : ''}`} data-group={i}></span>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- News Section (Bento Grid) -->
+  {news.enabled && news.items.length > 0 && (
+    <section class="py-24 bg-surface-container-highest">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="flex items-center gap-4 mb-12">
+          <div class="h-px bg-outline-variant flex-grow"></div>
+          <h2 class="font-headline-lg text-headline-lg text-on-surface shrink-0 px-4">{news.heading}</h2>
+          <div class="h-px bg-outline-variant flex-grow"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
+          {news.items.map((item, i) => {
+            if (item.featured) {
+              return (
+                <div class="md:col-span-7 h-full relative group rounded-2xl overflow-hidden shadow-xl">
+                  <div class="w-full h-full emerald-gradient group-hover:scale-105 transition-transform duration-700"></div>
+                  <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/40 to-transparent p-12 flex flex-col justify-end">
+                    {item.badge && <span class="font-label-md text-secondary-fixed-dim mb-4">{item.badge}</span>}
+                    <h3 class="font-headline-xl text-headline-xl text-white mb-6">{item.title}</h3>
+                    <a href={item.link_url || '/artikel'} class="text-white flex items-center gap-2 font-label-md hover:translate-x-2 transition-transform w-fit">
+                      {item.link_text} <span class="material-symbols-outlined">north_east</span>
+                    </a>
+                  </div>
+                </div>
+              );
+            } else {
+              const isPrimary = item.style === 'primary';
+              const isGlass = item.style === 'glass';
+              return (
+                <div class="md:col-span-5">
+                  <div class={`grid grid-rows-2 gap-6 h-full`}>
+                    <div class={`${isPrimary ? 'bg-primary text-on-primary border border-primary-container' : isGlass ? 'glass-card' : 'glass-card'} p-10 rounded-2xl flex flex-col justify-between group cursor-pointer hover:shadow-2xl transition-all`}>
+                      <div>
+                        <span class={`material-symbols-outlined text-4xl mb-4 ${isPrimary ? 'text-secondary-container' : 'text-primary'}`}>{item.icon}</span>
+                        <h4 class={`font-headline-md text-headline-md mb-4 ${isPrimary ? '' : 'text-on-surface'}`}>{item.title}</h4>
+                        <p class={`line-clamp-2 ${isPrimary ? 'opacity-80' : 'text-on-surface-variant'}`}>{item.description}</p>
+                      </div>
+                      <span class={`font-label-md mt-6 group-hover:translate-x-2 transition-transform flex items-center gap-2 ${isPrimary ? '' : 'text-primary'}`}>
+                        {item.link_text} <span class="material-symbols-outlined">arrow_right_alt</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA Section -->
   {cta.enabled && (
-    <section class="py-16 md:py-24 bg-gradient-to-br from-primary to-primary-light">
-      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-extrabold text-white mb-4">{cta.heading}</h2>
-        <p class="text-lg text-blue-100 mb-8">{cta.description}</p>
-        <a href={cta.button_url || '/kontak'} class="inline-flex items-center px-8 py-4 bg-secondary hover:bg-sky-600 text-white font-semibold rounded-xl text-lg transition-all shadow-xl">
-          {cta.button_text}
-        </a>
+    <section class="py-24 relative overflow-hidden bg-white">
+      <div class="absolute top-0 right-0 w-1/3 h-full emerald-gradient clip-path-slant opacity-10"></div>
+      <div class="max-w-7xl mx-auto px-8 relative z-10 flex flex-col md:flex-row items-center gap-16">
+        <div class="flex-grow">
+          <h2 class="font-headline-xl text-headline-xl mb-6">{cta.heading}</h2>
+          <p class="text-body-lg text-on-surface-variant max-w-xl mb-10">{cta.description}</p>
+          <div class="flex flex-wrap gap-4">
+            <a href={cta.button_url || '/kontak'} class="bg-primary text-on-primary px-10 py-5 rounded-xl font-headline-md text-lg shadow-xl shadow-primary/20 hover:scale-105 transition-all">{cta.button_text}</a>
+            {cta.button_secondary_text && (
+              <a href={cta.button_secondary_url || '/layanan'} class="bg-white border-2 border-primary text-primary px-10 py-5 rounded-xl font-headline-md text-lg hover:bg-surface-container transition-all">{cta.button_secondary_text}</a>
+            )}
+          </div>
+        </div>
+        <div class="w-full md:w-1/3 glass-card p-1 rounded-2xl rotate-3 shadow-2xl">
+          <div class="w-full aspect-[3/4] emerald-gradient rounded-xl flex items-center justify-center">
+            <span class="material-symbols-outlined text-8xl text-white/20">description</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Clients Section -->
+  {clients.enabled && clients.items.length > 0 && (
+    <section class="py-24 bg-surface-container-low">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-12">
+          {clients.badge && <span class="font-label-sm text-primary tracking-[0.25em] uppercase mb-2 block">{clients.badge}</span>}
+          <h2 class="font-headline-md text-headline-md text-on-surface">{clients.heading}</h2>
+        </div>
+        <div class="client-slid">
+          <div class="cl-track">
+            {clients.items.map(client => (
+              <div class="cl-item">
+                <div class="cl-card">
+                  <span class="material-symbols-outlined text-4xl text-primary/40 mb-2">{client.icon}</span>
+                  <span class="font-label-md text-on-surface-variant text-center">{client.name}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <button class="cl-btn cl-prev" aria-label="Prev"><span class="material-symbols-outlined text-on-surface text-[20px]">chevron_left</span></button>
+          <button class="cl-btn cl-next" aria-label="Next"><span class="material-symbols-outlined text-on-surface text-[20px]">chevron_right</span></button>
+        </div>
+        <div class="cl-dots">
+          {Array.from({ length: Math.ceil(clients.items.length / 5) }).map((_, i) => (
+            <span class={`cl-dot ${i === 0 ? 'active' : ''}`} data-group={i}></span>
+          ))}
+        </div>
       </div>
     </section>
   )}
 
   <!-- Slider Script -->
   <script>
-    const slides = document.querySelectorAll('.hero-slide');
-    const dots = document.querySelectorAll('.slider-dot');
-    if (slides.length > 1) {
+    // Hero Slider
+    (function () {
+      const slider = document.querySelector('.hero-main-slider');
+      if (!slider) return;
+      const track = slider.querySelector('.hs-track');
+      const slides = slider.querySelectorAll('.hs-slide');
+      const dots = slider.querySelectorAll('.hs-dot');
+      const total = slides.length;
       let current = 0;
-      function showSlide(n: number) {
-        slides.forEach((s, i) => {
-          (s as HTMLElement).classList.toggle('hidden', i !== n);
-        });
-        dots.forEach((d, i) => {
-          (d as HTMLElement).classList.toggle('bg-white', i === n);
-          (d as HTMLElement).classList.toggle('bg-white/40', i !== n);
-        });
-        current = n;
+      let autoPlay;
+
+      function goTo(n) {
+        if (!track) return;
+        slides[current]?.classList.remove('active');
+        dots[current]?.classList.remove('active');
+        current = ((n % total) + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        slides[current]?.classList.add('active');
+        dots[current]?.classList.add('active');
       }
-      dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-          showSlide(Number((dot as HTMLElement).dataset.index));
-        });
-      });
-      setInterval(() => showSlide((current + 1) % slides.length), 5000);
-    }
+
+      function startAuto() { stopAuto(); autoPlay = setInterval(() => goTo(current + 1), 5500); }
+      function stopAuto() { clearInterval(autoPlay); }
+
+      const prevBtn = slider.querySelector('.hs-prev');
+      const nextBtn = slider.querySelector('.hs-next');
+      if (prevBtn) prevBtn.addEventListener('click', () => { goTo(current - 1); startAuto(); });
+      if (nextBtn) nextBtn.addEventListener('click', () => { goTo(current + 1); startAuto(); });
+      dots.forEach(d => d.addEventListener('click', () => { goTo(parseInt(d.dataset.slide)); startAuto(); }));
+      slider.addEventListener('mouseenter', stopAuto);
+      slider.addEventListener('mouseleave', startAuto);
+
+      let tx = 0;
+      slider.addEventListener('touchstart', e => { tx = e.changedTouches[0].screenX; stopAuto(); }, { passive: true });
+      slider.addEventListener('touchend', e => { const d = tx - e.changedTouches[0].screenX; if (Math.abs(d) > 50) { goTo(current + (d > 0 ? 1 : -1)); } startAuto(); }, { passive: true });
+
+      slides[0]?.classList.add('active');
+      startAuto();
+    })();
+
+    // Client Slider
+    (function () {
+      const el = document.querySelector('.client-slid');
+      if (!el) return;
+      const track = el.querySelector('.cl-track');
+      const items = el.querySelectorAll('.cl-item');
+      const dots = document.querySelectorAll('.cl-dot');
+      const total = items.length;
+      let cur = 0, perPage = 5, autoPlay;
+
+      function calcPer() { perPage = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 3 : 5; }
+      function maxG() { return Math.max(0, total - perPage); }
+
+      function goTo(g) {
+        calcPer();
+        if (g > maxG()) g = 0; if (g < 0) g = maxG();
+        cur = g;
+        const w = 100 / perPage;
+        if (track) track.style.transform = `translateX(-${cur * w}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+      }
+
+      function startA() { stopA(); autoPlay = setInterval(() => goTo(cur + 1), 4000); }
+      function stopA() { clearInterval(autoPlay); }
+
+      const prevBtn = el.querySelector('.cl-prev');
+      const nextBtn = el.querySelector('.cl-next');
+      if (prevBtn) prevBtn.addEventListener('click', () => { goTo(cur - 1); startA(); });
+      if (nextBtn) nextBtn.addEventListener('click', () => { goTo(cur + 1); startA(); });
+      dots.forEach(d => d.addEventListener('click', () => { goTo(parseInt(d.dataset.group)); startA(); }));
+
+      calcPer(); goTo(0); startA();
+    })();
+
+    // Competency Slider
+    (function () {
+      const el = document.querySelector('.cmp-slid');
+      if (!el) return;
+      const section = el.closest('section');
+      if (!section) return;
+      const nav = section.querySelector('.cmp-nav');
+      const dotsWrap = section.querySelector('.cmp-dots');
+      const track = el.querySelector('.cmp-track');
+      const items = el.querySelectorAll('.cmp-item');
+      const dots = document.querySelectorAll('.cmp-dot');
+      const total = items.length;
+      let cur = 0, perPage = 3, autoPlay;
+
+      function calcPer() { perPage = window.innerWidth < 640 ? 1 : window.innerWidth < 1024 ? 2 : 3; }
+      function maxG() { return Math.max(0, total - perPage); }
+
+      function goTo(g) {
+        calcPer();
+        if (maxG() === 0) {
+          if (track) track.style.transform = 'translateX(0)';
+          if (nav) nav.style.display = 'none';
+          if (dotsWrap) dotsWrap.style.display = 'none';
+          return;
+        }
+        if (nav) nav.style.display = '';
+        if (dotsWrap) dotsWrap.style.display = '';
+        if (g > maxG()) g = 0; if (g < 0) g = maxG();
+        cur = g;
+        const itemW = items[0]?.offsetWidth ?? 300;
+        const gap = 24;
+        if (track) track.style.transform = `translateX(-${cur * (itemW + gap)}px)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+      }
+
+      function startA() { stopA(); autoPlay = setInterval(() => goTo(cur + 1), 5000); }
+      function stopA() { clearInterval(autoPlay); }
+
+      const prevBtn = section.querySelector('.cmp-prev');
+      const nextBtn = section.querySelector('.cmp-next');
+      if (prevBtn) prevBtn.addEventListener('click', () => { goTo(cur - 1); startA(); });
+      if (nextBtn) nextBtn.addEventListener('click', () => { goTo(cur + 1); startA(); });
+      dots.forEach(d => d.addEventListener('click', () => { goTo(parseInt(d.dataset.group)); startA(); }));
+
+      calcPer(); goTo(0); startA();
+    })();
   </script>
 </BaseLayout>

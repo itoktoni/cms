@@ -5,24 +5,27 @@
       "enabled": true,
       "items": [
         {
-          "title": "Jasa Kalibrasi Alat Kesehatan Terpercaya",
-          "subtitle": "Memastikan akurasi dan keselamatan pasien dengan layanan kalibrasi berstandar nasional & internasional.",
-          "button_text": "Konsultasi Gratis",
+          "title": "Ketelitian dalam Setiap Pengukuran",
+          "subtitle": "Menjamin ketelitian dan keamanan melalui kalibrasi dan verifikasi teknis alat kesehatan sesuai standar nasional dan internasional.",
+          "button_text": "Order Sekarang",
           "button_url": "/kontak",
+          "badge": "Institusi IPFK Terakreditasi",
           "image": ""
         },
         {
-          "title": "Preventive Maintenance Berkala",
-          "subtitle": "Perpanjang usia pakai alat kesehatan Anda dengan program maintenance terjadwal dari teknisi bersertifikasi.",
-          "button_text": "Lihat Layanan",
+          "title": "Pencegahan Sejak Dini",
+          "subtitle": "Pemeriksaan berkala untuk memastikan alat kesehatan berfungsi optimal dan memenuhi standar keselamatan yang berlaku.",
+          "button_text": "Jadwalkan Inspeksi",
           "button_url": "/layanan",
+          "badge": "Inspeksi Preventive",
           "image": ""
         },
         {
-          "title": "Laboratorium Terakreditasi KAN",
-          "subtitle": "Didukung laboratorium kalibrasi terakreditasi dan peralatan standar referensi terkini.",
-          "button_text": "Tentang Kami",
-          "button_url": "/tentang",
+          "title": "Kapan Saja, Di Saja",
+          "subtitle": "Pastikan keaslian sertifikat kalibrasi Anda melalui database akreditasi kami yang terintegrasi dan terpercaya.",
+          "button_text": "Verifikasi Sekarang",
+          "button_url": "/kontak",
+          "badge": "Verifikasi Sertifikat",
           "image": ""
         }
       ]
@@ -36,39 +39,143 @@
         { "value": "50+", "label": "Teknisi Tersertifikasi" }
       ]
     },
-    "why_us": {
+    "certifications": {
       "enabled": true,
-      "heading": "Mengapa Memilih Kami?",
-      "subheading": "Keunggulan yang membedakan kami dari penyedia jasa lainnya",
+      "heading": "Standar Kualitas Kami",
       "items": [
         {
-          "title": "Terakreditasi KAN",
-          "description": "Laboratorium kalibrasi kami terakreditasi Komite Akreditasi Nasional sesuai ISO 17025.",
-          "icon": "🏅"
+          "title": "KAN LK-XXX-IDN",
+          "description": "Akreditasi nasional untuk institusi pengujian fasilitas kesehatan sesuai standar nasional dan internasional.",
+          "image": "",
+          "link_text": "Verify Details"
         },
         {
-          "title": "Teknisi Bersertifikasi",
-          "description": "Seluruh teknisi kami memiliki sertifikasi kompetensi dari lembaga terakreditasi.",
-          "icon": "👨‍🔧"
+          "title": "IPFK Berstandar",
+          "description": "Standar kompetensi lembaga pengujian fasilitas kesehatan untuk memastikan ketelitian teknis dan mutu layanan.",
+          "image": "",
+          "link_text": "Verify Details"
         },
         {
-          "title": "Respons Cepat",
-          "description": "Tim kami siap merespons dalam 24 jam dan tersedia untuk layanan darurat.",
-          "icon": "⚡"
+          "title": "Ketelitian Tinggi",
+          "description": "Ketelitian mutlak melalui standar yang tertraceability untuk setiap alat yang dikalibrasi.",
+          "image": "",
+          "link_text": "Verify Details"
+        }
+      ]
+    },
+    "verification": {
+      "enabled": true,
+      "badge": "Otoritas Sertifikat",
+      "heading": "Portal Verifikasi Sertifikat",
+      "description": "Verifikasi keaslian sertifikat kalibrasi alat kesehatan Anda menggunakan database akreditasi kami yang terintegrasi.",
+      "placeholder": "Masukkan Nomor Sertifikat (contoh: ECM-2024-XXXX)",
+      "button_text": "Verifikasi Sekarang",
+      "features": [
+        { "icon": "verified_user", "label": "256-bit Encrypted" },
+        { "icon": "history", "label": "Real-time Logs" },
+        { "icon": "account_balance", "label": "Terakreditasi KAN" }
+      ]
+    },
+    "services": {
+      "enabled": true,
+      "heading": "Pelayanan Kami",
+      "description": "Solusi teknis terdepan untuk fasilitas kesehatan modern, memastikan setiap alat diagnostik beroperasi dalam batas presisi yang ketat.",
+      "link_text": "Semua Layanan",
+      "link_url": "/layanan"
+    },
+    "advantages": {
+      "enabled": true,
+      "heading": "Keunggulan Teknis Kami",
+      "description": "Lebih dari sekadar kalibrasi, kami menyediakan jaminan teknis menyeluruh untuk lingkungan medis paling kritis.",
+      "items": [
+        {
+          "title": "Peralatan Diagnostik",
+          "description": "Kalibrasi menyeluruh untuk radiologi, ultrasonografi, dan sistem monitoring hemodinamik.",
+          "icon": "medical_services",
+          "image": ""
         },
         {
-          "title": "Cakupan Nasional",
-          "description": "Melayani rumah sakit dan klinik di seluruh Indonesia dengan cabang di 5 kota besar.",
-          "icon": "🌏"
+          "title": "Sistem Life Support",
+          "description": "Verifikasi kritis untuk ventilator, mesin anestesi, dan unit life support jantung.",
+          "icon": "vital_signs",
+          "image": ""
+        },
+        {
+          "title": "Analisis Laboratorium",
+          "description": "Traceability metrologis untuk analyzer otomatis, pipet, dan spektrofotometer.",
+          "icon": "biotech",
+          "image": ""
+        },
+        {
+          "title": "Instrumen Bedah",
+          "description": "Pengujian presisi untuk laser bedah, unit elektrokauter, dan asisten robotik.",
+          "icon": "precision_manufacturing",
+          "image": ""
+        }
+      ]
+    },
+    "news": {
+      "enabled": true,
+      "heading": "Berita & Informasi",
+      "items": [
+        {
+          "title": "Kalibrasi Alat Kesehatan: Panduan Lengkap untuk Fasilitas Kesehatan",
+          "description": "",
+          "badge": "ARTIKEL • 2024",
+          "image": "",
+          "link_text": "Baca Selengkapnya",
+          "link_url": "/artikel",
+          "featured": true
+        },
+        {
+          "title": "Regulasi Terbaru: Pedoman Kemenkes 2024",
+          "description": "Bagaimana mandat baru untuk alat terapi mempengaruhi penyedia layanan kesehatan di Indonesia.",
+          "icon": "policy",
+          "badge": "",
+          "image": "",
+          "link_text": "Baca Selengkapnya",
+          "link_url": "/artikel",
+          "featured": false,
+          "style": "primary"
+        },
+        {
+          "title": "Studi Kasus: Efisiensi Kalibrasi di Fasilitas Kesehatan",
+          "description": "Analisis mendalam implementasi sistem manajemen kalibrasi terintegrasi kami.",
+          "icon": "microwave",
+          "badge": "",
+          "image": "",
+          "link_text": "Lihat Metrics",
+          "link_url": "/artikel",
+          "featured": false,
+          "style": "glass"
         }
       ]
     },
     "cta": {
       "enabled": true,
-      "heading": "Siap Memastikan Alat Kesehatan Anda Akurat?",
-      "description": "Hubungi kami sekarang untuk konsultasi gratis dan penawaran terbaik.",
-      "button_text": "Hubungi Kami Sekarang",
-      "button_url": "/kontak"
+      "heading": "Tingkatkan Keandalan Fasilitas Anda",
+      "description": "Bekerja sama dengan ECM untuk audit teknis dan siklus kalibrasi yang menjamin ketersediaan alat dan ketelitian maksimal.",
+      "button_text": "Konsultasi Sekarang",
+      "button_url": "/kontak",
+      "button_secondary_text": "Lihat Katalog Layanan",
+      "button_secondary_url": "/layanan"
+    },
+    "clients": {
+      "enabled": true,
+      "heading": "Dipercaya oleh Institusi Terkemuka",
+      "badge": "Daftar Klien Kami",
+      "items": [
+        { "name": "National Hospital", "icon": "apartment" },
+        { "name": "BioMed Research Lab", "icon": "science" },
+        { "name": "St. Mary's Medical", "icon": "medical_services" },
+        { "name": "Global Health Institute", "icon": "public" },
+        { "name": "Apex Diagnostics", "icon": "biotech" },
+        { "name": "Mayo Regional Clinic", "icon": "local_hospital" },
+        { "name": "Siloam Hospitals", "icon": "biotech" },
+        { "name": "Pondok Indah Group", "icon": "science" },
+        { "name": "RS Cipto", "icon": "apartment" },
+        { "name": "Medistra Hospital", "icon": "health_and_safety" }
+      ]
     }
   }
 }
