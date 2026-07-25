@@ -176,6 +176,127 @@
         { "name": "RS Cipto", "icon": "apartment" },
         { "name": "Medistra Hospital", "icon": "health_and_safety" }
       ]
+    },
+    "portfolio": {
+      "enabled": true,
+      "heading": "Kisah Sukses Klien Kami",
+      "description": "Bukti nyata bagaimana solusi kalibrasi ECM membantu fasilitas kesehatan meningkatkan akurasi dan efisiensi operasional.",
+      "items": [
+        {
+          "client": "RS Premier Bintaro",
+          "industry": "Kesehatan",
+          "title": "Kalibrasi Otomatis Alat Laboratorium",
+          "description": "Implementasi sistem kalibrasi otomatis untuk seluruh perangkat laboratorium, mengurangi downtime dan meningkatkan akurasi diagnosa.",
+          "stats": [
+            { "value": "99.9%", "label": "Akurasi" },
+            { "value": "80%", "label": "Waktu Hemat" },
+            { "value": "0", "label": "Gagal Kalibrasi" }
+          ],
+          "image": "",
+          "link_text": "Lihat Studi Kasus"
+        },
+        {
+          "client": "Siloam Hospitals",
+          "industry": "Kesehatan",
+          "title": "Manajemen Siklus Kalibrasi Terpadu",
+          "description": "Sistem terintegrasi untuk mengelola seluruh siklus kalibrasi alat kesehatan di 6 cabang, dari penjadwalan hingga sertifikasi.",
+          "stats": [
+            { "value": "6", "label": "Cabang Terhubung" },
+            { "value": "2.000+", "label": "Alat Terkelola" },
+            { "value": "100%", "label": "Compliance" }
+          ],
+          "image": "",
+          "link_text": "Lihat Studi Kasus"
+        },
+        {
+          "client": "Mayo Regional Clinic",
+          "industry": "Klinik",
+          "title": "Verifikasi Sertifikat Digital",
+          "description": "Digitalisasi seluruh sertifikat kalibrasi dengan portal verifikasi online, memudahkan audit dan compliance regulatory.",
+          "stats": [
+            { "value": "100%", "label": "Digital" },
+            { "value": "3 detik", "label": "Waktu Verifikasi" },
+            { "value": "0", "label": "Sertifikat Palsu" }
+          ],
+          "image": "",
+          "link_text": "Lihat Studi Kasus"
+        }
+      ]
+    },
+    "process": {
+      "enabled": true,
+      "heading": "Bagaimana Kami Bekerja",
+      "description": "Proses sistematis yang terbukti efektif memastikan setiap alat kesehatan mendapatkan layanan kalibrasi terbaik.",
+      "steps": [
+        {
+          "number": "1",
+          "title": "Konsultasi Awal",
+          "description": "Analisis kebutuhan kalibrasi dan identifikasi alat yang memerlukan layanan."
+        },
+        {
+          "number": "2",
+          "title": "Survey Lapangan",
+          "description": "Pemeriksaan onsite untuk memahami kondisi lingkungan dan jenis alat."
+        },
+        {
+          "number": "3",
+          "title": "Penawaran & Perencanaan",
+          "description": "Penyusunan jadwal kalibrasi yang minim gangguan operasional."
+        },
+        {
+          "number": "4",
+          "title": "Eksekusi Kalibrasi",
+          "description": "Pengkalibrasian oleh teknisi tersertifikasi dengan peralatan terstandardisasi."
+        },
+        {
+          "number": "5",
+          "title": "Verifikasi & Uji Coba",
+          "description": "Pengujian ulang untuk memastikan hasil kalibrasi sesuai standar."
+        },
+        {
+          "number": "6",
+          "title": "Sertifikasi & Dokumentasi",
+          "description": "Penerbitan sertifikat kalibrasi dan dokumentasi lengkap."
+        },
+        {
+          "number": "7",
+          "title": "Pelaporan Hasil",
+          "description": "Laporan detail hasil kalibrasi untuk keperluan audit dan compliance."
+        },
+        {
+          "number": "8",
+          "title": "Maintenance Berkala",
+          "description": "Penjadwalan ulang kalibrasi berkala untuk menjaga akurasi jangka panjang."
+        }
+      ]
+    },
+    "testimonial": {
+      "enabled": true,
+      "heading": "Apa Kata Mereka",
+      "description": "Dipercaya oleh ribuan fasilitas kesehatan di seluruh Indonesia.",
+      "items": [
+        {
+          "quote": "ECM telah menjadi mitra terpercaya kami dalam menjaga akurasi alat kesehatan. Layanan mereka cepat, profesional, dan selalu sesuai standar.",
+          "author": "Dr. Sarah Wijaya",
+          "role": "Direktur Teknis",
+          "company": "RS Premier Bintaro",
+          "rating": 5
+        },
+        {
+          "quote": "Sejak bekerja sama dengan ECM, tingkat compliance alat kesehatan kami meningkat signifikan. Sertifikat yang diterbitkan selalu diakui oleh KAN.",
+          "author": "Budi Santoso",
+          "role": "Head of Biomedical Engineering",
+          "company": "Siloam Hospitals Group",
+          "rating": 5
+        },
+        {
+          "quote": "Portal verifikasi sertifikat ECM memudahkan kami dalam melakukan audit internal. Semua data terintegrasi dan mudah diakses.",
+          "author": "Rina Hartono",
+          "role": "Quality Assurance Manager",
+          "company": "Mayo Regional Clinic",
+          "rating": 5
+        }
+      ]
     }
   }
 }

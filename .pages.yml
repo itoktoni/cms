@@ -134,6 +134,121 @@ content:
               - name: button_url
                 label: URL Tombol
                 type: string
+          - name: portfolio
+            label: Portofolio / Studi Kasus
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: heading
+                label: Judul Section
+                type: string
+              - name: description
+                label: Deskripsi
+                type: string
+              - name: items
+                label: Studi Kasus
+                type: object
+                list: true
+                fields:
+                  - name: client
+                    label: Nama Klien
+                    type: string
+                    required: true
+                  - name: industry
+                    label: Industri
+                    type: string
+                  - name: title
+                    label: Judul Proyek
+                    type: string
+                    required: true
+                  - name: description
+                    label: Deskripsi
+                    type: string
+                  - name: stats
+                    label: Statistik
+                    type: object
+                    list: true
+                    fields:
+                      - name: value
+                        label: Angka
+                        type: string
+                        required: true
+                      - name: label
+                        label: Label
+                        type: string
+                        required: true
+                  - name: image
+                    label: Gambar
+                    type: image
+                  - name: link_text
+                    label: Teks Link
+                    type: string
+          - name: process
+            label: Proses Kerja
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: heading
+                label: Judul Section
+                type: string
+              - name: description
+                label: Deskripsi
+                type: string
+              - name: steps
+                label: Langkah Proses
+                type: object
+                list: true
+                fields:
+                  - name: number
+                    label: Nomor
+                    type: string
+                    required: true
+                  - name: title
+                    label: Judul
+                    type: string
+                    required: true
+                  - name: description
+                    label: Deskripsi
+                    type: string
+          - name: testimonial
+            label: Testimoni Klien
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: heading
+                label: Judul Section
+                type: string
+              - name: description
+                label: Deskripsi
+                type: string
+              - name: items
+                label: Testimoni
+                type: object
+                list: true
+                fields:
+                  - name: quote
+                    label: Kutipan
+                    type: string
+                    required: true
+                  - name: author
+                    label: Nama Penulis
+                    type: string
+                    required: true
+                  - name: role
+                    label: Jabatan
+                    type: string
+                  - name: company
+                    label: Perusahaan
+                    type: string
+                  - name: rating
+                    label: Rating (1-5)
+                    type: number
 
   - name: page-about
     label: "Halaman: Tentang Kami"

@@ -6,7 +6,7 @@ import homeData from '../content/pages/home.json';
 const services = await getCollection('services');
 services.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 
-const { slider, stats, certifications, verification, services: servicesConfig, advantages, news, cta, clients } = homeData.sections;
+const { slider, stats, certifications, verification, services: servicesConfig, advantages, news, cta, clients, portfolio, process, testimonial } = homeData.sections;
 ---
 
 <BaseLayout title={homeData.title}>
@@ -332,6 +332,115 @@ const { slider, stats, certifications, verification, services: servicesConfig, a
         <div class="cl-dots">
           {Array.from({ length: Math.ceil(clients.items.length / 5) }).map((_, i) => (
             <span class={`cl-dot ${i === 0 ? 'active' : ''}`} data-group={i}></span>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Portfolio / Case Studies -->
+  {portfolio && portfolio.enabled && portfolio.items && portfolio.items.length > 0 && (
+    <section class="py-24 bg-surface-container-low">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-16">
+          <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{portfolio.heading}</h2>
+          <p class="text-on-surface-variant text-body-lg max-w-2xl mx-auto">{portfolio.description}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {portfolio.items.map(item => (
+            <div class="bg-white rounded-xl overflow-hidden border border-outline-variant/30 hover:shadow-xl transition-all group">
+              <div class="h-48 emerald-gradient relative overflow-hidden">
+                {item.image ? (
+                  <img src={item.image} alt={item.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="material-symbols-outlined text-6xl text-white/20">case_study</span>
+                  </div>
+                )}
+                {item.industry && (
+                  <span class="absolute top-4 left-4 bg-white/90 text-primary text-xs font-bold px-3 py-1 rounded-full">{item.industry}</span>
+                )}
+              </div>
+              <div class="p-6">
+                <p class="text-primary text-sm font-semibold mb-1">{item.client}</p>
+                <h3 class="font-headline-md text-headline-md mb-3">{item.title}</h3>
+                <p class="text-on-surface-variant text-sm mb-4 line-clamp-3">{item.description}</p>
+                {item.stats && item.stats.length > 0 && (
+                  <div class="grid grid-cols-3 gap-2 mb-4">
+                    {item.stats.map(stat => (
+                      <div class="text-center bg-surface-container-low rounded-lg p-2">
+                        <div class="text-primary font-bold text-sm">{stat.value}</div>
+                        <div class="text-outline text-[10px]">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {item.link_text && (
+                  <a href="#" class="text-primary font-label-md text-sm flex items-center gap-1 hover:gap-2 transition-all">
+                    {item.link_text} <span class="material-symbols-outlined text-sm">arrow_right_alt</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Process / How We Work -->
+  {process && process.enabled && process.steps && process.steps.length > 0 && (
+    <section class="py-24 bg-background">
+      <div class="max-w-7xl mx-auto px-8">
+        <div class="text-center mb-16">
+          <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{process.heading}</h2>
+          <p class="text-on-surface-variant text-body-lg max-w-2xl mx-auto">{process.description}</p>
+        </div>
+        <div class="relative">
+          <div class="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-outline-variant/30 -translate-y-1/2"></div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {process.steps.map((step, i) => (
+              <div class="relative text-center group">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-lg text-xl shadow-lg group-hover:scale-110 transition-transform z-10 relative">
+                  {step.number}
+                </div>
+                <h4 class="font-headline-md text-headline-md mb-2">{step.title}</h4>
+                <p class="text-on-surface-variant text-sm">{step.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Testimonial -->
+  {testimonial && testimonial.enabled && testimonial.items && testimonial.items.length > 0 && (
+    <section class="py-24 bg-[#007A4D] relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+      </div>
+      <div class="max-w-7xl mx-auto px-8 relative z-10">
+        <div class="text-center mb-16">
+          <h2 class="font-headline-lg text-headline-lg text-white mb-4">{testimonial.heading}</h2>
+          <p class="text-white/80 text-body-lg max-w-2xl mx-auto">{testimonial.description}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {testimonial.items.map(item => (
+            <div class="glass-dark p-8 rounded-2xl border-white/20 hover:-translate-y-2 transition-all duration-300">
+              <div class="flex gap-1 mb-4">
+                {Array.from({ length: item.rating || 5 }).map(() => (
+                  <span class="material-symbols-outlined text-secondary-container text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+                ))}
+              </div>
+              <p class="text-white/90 text-body-md mb-6 italic leading-relaxed">"{item.quote}"</p>
+              <div class="border-t border-white/20 pt-4">
+                <p class="text-white font-label-md">{item.author}</p>
+                <p class="text-white/60 text-sm">{item.role}</p>
+                <p class="text-secondary-container text-sm font-semibold">{item.company}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
