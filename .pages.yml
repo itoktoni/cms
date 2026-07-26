@@ -36,16 +36,13 @@ content:
         label: Judul Halaman
         type: string
       - name: sections
-        label: Sections
+        label: Sections (Drag & Drop untuk reorder)
         type: object
         fields:
           - name: slider
             label: Slider / Hero
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -77,9 +74,6 @@ content:
             label: Statistik
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -100,9 +94,6 @@ content:
             label: Sertifikasi
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -131,9 +122,6 @@ content:
             label: Verifikasi Sertifikat
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -167,9 +155,6 @@ content:
             label: Layanan
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -189,9 +174,6 @@ content:
             label: Keunggulan
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -223,9 +205,6 @@ content:
             label: Berita & Informasi
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -273,9 +252,6 @@ content:
             label: Call to Action
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -301,9 +277,6 @@ content:
             label: Klien
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -329,9 +302,6 @@ content:
             label: Portofolio / Studi Kasus
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -383,9 +353,6 @@ content:
             label: Proses Kerja
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -415,9 +382,6 @@ content:
             label: Testimoni Klien
             type: object
             fields:
-              - name: order
-                label: Urutan
-                type: number
               - name: enabled
                 label: Aktif
                 type: boolean
@@ -611,14 +575,11 @@ content:
         label: Judul Halaman
         type: string
       - name: sections
-        label: Sections (Klik + untuk tambah section)
+        label: Sections (Klik + untuk tambah section, drag untuk reorder)
         type: object
         list: true
         collapsible: true
         fields:
-          - name: order
-            label: Urutan
-            type: number
           - name: enabled
             label: Aktif
             type: boolean
@@ -630,7 +591,7 @@ content:
             label: Deskripsi
             type: string
           - name: products
-            label: Produk (Klik + untuk tambah produk)
+            label: Produk (Klik + untuk tambah produk, drag untuk reorder)
             type: object
             list: true
             collapsible: true
@@ -639,9 +600,6 @@ content:
                 label: Slug (URL)
                 type: string
                 required: true
-              - name: order
-                label: Urutan
-                type: number
               - name: title
                 label: Nama Produk
                 type: string
@@ -685,7 +643,7 @@ content:
     path: src/content/products
     type: collection
     view:
-      fields: [title, category, section, order]
+      fields: [title, category, section]
     fields:
       - name: title
         label: Nama Produk
@@ -713,9 +671,6 @@ content:
           - { value: "Alat Bedah", label: "Alat Bedah" }
           - { value: "Alat Laboratorium", label: "Alat Laboratorium" }
         required: true
-      - name: order
-        label: Urutan
-        type: number
       - name: specs
         label: Spesifikasi
         type: object
