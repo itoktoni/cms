@@ -36,112 +36,55 @@ content:
         label: Judul Halaman
         type: string
       - name: sections
-        label: Sections (Drag & Drop untuk reorder)
+        label: Sections
         type: object
-        list: true
-        collapsible: true
         fields:
-          - name: key
-            label: ID Section (jangan diubah)
-            type: string
-            required: true
-            readOnly: true
-          - name: enabled
-            label: Aktif
-            type: boolean
-          - name: heading
-            label: Judul Section
-            type: string
-          - name: description
-            label: Deskripsi
-            type: string
-          - name: badge
-            label: Badge
-            type: string
-          - name: placeholder
-            label: Placeholder Input
-            type: string
-          - name: button_text
-            label: Teks Tombol
-            type: string
-          - name: button_url
-            label: URL Tombol
-            type: string
-          - name: button_secondary_text
-            label: Teks Tombol Sekunder
-            type: string
-          - name: button_secondary_url
-            label: URL Tombol Sekunder
-            type: string
-          - name: link_text
-            label: Teks Link
-            type: string
-          - name: link_url
-            label: URL Link
-            type: string
-          - name: items
-            label: Items
+          - name: slider
+            label: "Slider / Hero"
             type: object
-            list: true
-            collapsible: true
             fields:
-              - name: title
-                label: Judul
-                type: string
-              - name: subtitle
-                label: Subtitle
-                type: string
-              - name: description
-                label: Deskripsi
-                type: string
-              - name: button_text
-                label: Teks Tombol
-                type: string
-              - name: button_url
-                label: URL Tombol
-                type: string
-              - name: badge
-                label: Badge
-                type: string
-              - name: image
-                label: Gambar
-                type: image
-              - name: icon
-                label: Ikon
-                type: string
-              - name: link_text
-                label: Teks Link
-                type: string
-              - name: link_url
-                label: URL Link
-                type: string
-              - name: featured
-                label: Featured
+              - name: enabled
+                label: Aktif
                 type: boolean
-              - name: style
-                label: Style
-                type: select
-                options:
-                  - { value: default, label: Default }
-                  - { value: primary, label: Primary }
-                  - { value: glass, label: Glass }
-              - name: value
-                label: Angka
-                type: string
-              - name: label
-                label: Label
-                type: string
-              - name: name
-                label: Nama
-                type: string
-              - name: client
-                label: Nama Klien
-                type: string
-              - name: industry
-                label: Industri
-                type: string
-              - name: stats
-                label: Statistik
+              - name: order
+                label: Urutan
+                type: number
+              - name: items
+                label: Slide Items
+                type: object
+                list: true
+                fields:
+                  - name: title
+                    label: Judul
+                    type: string
+                    required: true
+                  - name: subtitle
+                    label: Subtitle
+                    type: string
+                  - name: button_text
+                    label: Teks Tombol
+                    type: string
+                  - name: button_url
+                    label: URL Tombol
+                    type: string
+                  - name: badge
+                    label: Badge
+                    type: string
+                  - name: image
+                    label: Gambar Background
+                    type: image
+          - name: stats
+            label: "Statistik"
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: order
+                label: Urutan
+                type: number
+              - name: items
+                label: Angka Statistik
                 type: object
                 list: true
                 fields:
@@ -153,51 +96,359 @@ content:
                     label: Label
                     type: string
                     required: true
-              - name: quote
-                label: Kutipan
-                type: string
-              - name: author
-                label: Nama Penulis
-                type: string
-              - name: role
-                label: Jabatan
-                type: string
-              - name: company
-                label: Perusahaan
-                type: string
-              - name: rating
-                label: Rating (1-5)
+          - name: certifications
+            label: "Sertifikasi"
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: order
+                label: Urutan
                 type: number
-              - name: number
-                label: Nomor
+              - name: heading
+                label: Judul Section
                 type: string
-          - name: features
-            label: Fitur
+              - name: items
+                label: Sertifikasi Items
+                type: object
+                list: true
+                fields:
+                  - name: title
+                    label: Nama Sertifikasi
+                    type: string
+                    required: true
+                  - name: description
+                    label: Deskripsi
+                    type: string
+                  - name: image
+                    label: Gambar
+                    type: image
+                  - name: link_text
+                    label: Teks Link
+                    type: string
+          - name: verification
+            label: "Verifikasi Sertifikat"
             type: object
-            list: true
             fields:
-              - name: icon
-                label: Ikon
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: order
+                label: Urutan
+                type: number
+              - name: badge
+                label: Badge
                 type: string
-              - name: label
-                label: Label
+              - name: heading
+                label: Judul Section
                 type: string
-          - name: steps
-            label: Langkah Proses
-            type: object
-            list: true
-            fields:
-              - name: number
-                label: Nomor
-                type: string
-                required: true
-              - name: title
-                label: Judul
-                type: string
-                required: true
               - name: description
                 label: Deskripsi
                 type: string
+              - name: placeholder
+                label: Placeholder Input
+                type: string
+              - name: button_text
+                label: Teks Tombol
+                type: string
+              - name: features
+                label: Fitur
+                type: object
+                list: true
+                fields:
+                  - name: icon
+                    label: Ikon
+                    type: string
+                  - name: label
+                    label: Label
+                    type: string
+          - name: services
+            label: "Layanan"
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: order
+                label: Urutan
+                type: number
+              - name: heading
+                label: Judul Section
+                type: string
+              - name: description
+                label: Deskripsi
+                type: string
+              - name: link_text
+                label: Teks Link
+                type: string
+              - name: link_url
+                label: URL Link
+                type: string
+          - name: advantages
+            label: "Keunggulan"
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: order
+                label: Urutan
+                type: number
+              - name: heading
+                label: Judul Section
+                type: string
+              - name: description
+                label: Deskripsi
+                type: string
+              - name: items
+                label: Keunggulan Items
+                type: object
+                list: true
+                fields:
+                  - name: title
+                    label: Judul
+                    type: string
+                    required: true
+                  - name: description
+                    label: Deskripsi
+                    type: string
+                  - name: icon
+                    label: Ikon (Material Symbols)
+                    type: string
+                  - name: image
+                    label: Gambar
+                    type: image
+          - name: news
+            label: "Berita & Informasi"
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: order
+                label: Urutan
+                type: number
+              - name: heading
+                label: Judul Section
+                type: string
+              - name: items
+                label: Berita Items
+                type: object
+                list: true
+                fields:
+                  - name: title
+                    label: Judul
+                    type: string
+                    required: true
+                  - name: description
+                    label: Deskripsi
+                    type: string
+                  - name: badge
+                    label: Badge
+                    type: string
+                  - name: icon
+                    label: Ikon
+                    type: string
+                  - name: image
+                    label: Gambar
+                    type: image
+                  - name: link_text
+                    label: Teks Link
+                    type: string
+                  - name: link_url
+                    label: URL Link
+                    type: string
+                  - name: featured
+                    label: Featured
+                    type: boolean
+                  - name: style
+                    label: Style
+                    type: select
+                    options:
+                      - { value: default, label: Default }
+                      - { value: primary, label: Primary }
+                      - { value: glass, label: Glass }
+          - name: cta
+            label: "Call to Action"
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: order
+                label: Urutan
+                type: number
+              - name: heading
+                label: Judul
+                type: string
+              - name: description
+                label: Deskripsi
+                type: string
+              - name: button_text
+                label: Teks Tombol Utama
+                type: string
+              - name: button_url
+                label: URL Tombol Utama
+                type: string
+              - name: button_secondary_text
+                label: Teks Tombol Sekunder
+                type: string
+              - name: button_secondary_url
+                label: URL Tombol Sekunder
+                type: string
+          - name: clients
+            label: "Klien"
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: order
+                label: Urutan
+                type: number
+              - name: heading
+                label: Judul Section
+                type: string
+              - name: badge
+                label: Badge
+                type: string
+              - name: items
+                label: Daftar Klien
+                type: object
+                list: true
+                fields:
+                  - name: name
+                    label: Nama Klien
+                    type: string
+                    required: true
+                  - name: icon
+                    label: Ikon
+                    type: string
+          - name: portfolio
+            label: "Portofolio / Studi Kasus"
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: order
+                label: Urutan
+                type: number
+              - name: heading
+                label: Judul Section
+                type: string
+              - name: description
+                label: Deskripsi
+                type: string
+              - name: items
+                label: Studi Kasus
+                type: object
+                list: true
+                fields:
+                  - name: client
+                    label: Nama Klien
+                    type: string
+                    required: true
+                  - name: industry
+                    label: Industri
+                    type: string
+                  - name: title
+                    label: Judul Proyek
+                    type: string
+                    required: true
+                  - name: description
+                    label: Deskripsi
+                    type: string
+                  - name: stats
+                    label: Statistik
+                    type: object
+                    list: true
+                    fields:
+                      - name: value
+                        label: Angka
+                        type: string
+                        required: true
+                      - name: label
+                        label: Label
+                        type: string
+                        required: true
+                  - name: image
+                    label: Gambar
+                    type: image
+                  - name: link_text
+                    label: Teks Link
+                    type: string
+          - name: process
+            label: "Proses Kerja"
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: order
+                label: Urutan
+                type: number
+              - name: heading
+                label: Judul Section
+                type: string
+              - name: description
+                label: Deskripsi
+                type: string
+              - name: steps
+                label: Langkah Proses
+                type: object
+                list: true
+                fields:
+                  - name: number
+                    label: Nomor
+                    type: string
+                    required: true
+                  - name: title
+                    label: Judul
+                    type: string
+                    required: true
+                  - name: description
+                    label: Deskripsi
+                    type: string
+          - name: testimonial
+            label: "Testimoni Klien"
+            type: object
+            fields:
+              - name: enabled
+                label: Aktif
+                type: boolean
+              - name: order
+                label: Urutan
+                type: number
+              - name: heading
+                label: Judul Section
+                type: string
+              - name: description
+                label: Deskripsi
+                type: string
+              - name: items
+                label: Testimoni
+                type: object
+                list: true
+                fields:
+                  - name: quote
+                    label: Kutipan
+                    type: string
+                    required: true
+                  - name: author
+                    label: Nama Penulis
+                    type: string
+                    required: true
+                  - name: role
+                    label: Jabatan
+                    type: string
+                  - name: company
+                    label: Perusahaan
+                    type: string
+                  - name: rating
+                    label: Rating (1-5)
+                    type: number
 
   - name: page-about
     label: "Halaman: Tentang Kami"
