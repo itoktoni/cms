@@ -2,6 +2,7 @@
   "title": "Beranda",
   "sections": {
     "slider": {
+      "order": 1,
       "enabled": true,
       "items": [
         {
@@ -31,6 +32,7 @@
       ]
     },
     "stats": {
+      "order": 2,
       "enabled": true,
       "items": [
         { "value": "500+", "label": "Klien Aktif" },
@@ -40,6 +42,7 @@
       ]
     },
     "certifications": {
+      "order": 3,
       "enabled": true,
       "heading": "Standar Kualitas Kami",
       "items": [
@@ -64,6 +67,7 @@
       ]
     },
     "verification": {
+      "order": 4,
       "enabled": true,
       "badge": "Otoritas Sertifikat",
       "heading": "Portal Verifikasi Sertifikat",
@@ -77,6 +81,7 @@
       ]
     },
     "services": {
+      "order": 5,
       "enabled": true,
       "heading": "Pelayanan Kami",
       "description": "Solusi teknis terdepan untuk fasilitas kesehatan modern, memastikan setiap alat diagnostik beroperasi dalam batas presisi yang ketat.",
@@ -84,6 +89,7 @@
       "link_url": "/layanan"
     },
     "advantages": {
+      "order": 6,
       "enabled": true,
       "heading": "Keunggulan Teknis Kami",
       "description": "Lebih dari sekadar kalibrasi, kami menyediakan jaminan teknis menyeluruh untuk lingkungan medis paling kritis.",
@@ -115,6 +121,7 @@
       ]
     },
     "news": {
+      "order": 7,
       "enabled": true,
       "heading": "Berita & Informasi",
       "items": [
@@ -152,6 +159,7 @@
       ]
     },
     "cta": {
+      "order": 8,
       "enabled": true,
       "heading": "Tingkatkan Keandalan Fasilitas Anda",
       "description": "Bekerja sama dengan ECM untuk audit teknis dan siklus kalibrasi yang menjamin ketersediaan alat dan ketelitian maksimal.",
@@ -161,6 +169,7 @@
       "button_secondary_url": "/layanan"
     },
     "clients": {
+      "order": 9,
       "enabled": true,
       "heading": "Dipercaya oleh Institusi Terkemuka",
       "badge": "Daftar Klien Kami",
@@ -178,6 +187,7 @@
       ]
     },
     "portfolio": {
+      "order": 10,
       "enabled": true,
       "heading": "Kisah Sukses Klien Kami",
       "description": "Bukti nyata bagaimana solusi kalibrasi ECM membantu fasilitas kesehatan meningkatkan akurasi dan efisiensi operasional.",
@@ -224,6 +234,7 @@
       ]
     },
     "process": {
+      "order": 11,
       "enabled": true,
       "heading": "Bagaimana Kami Bekerja",
       "description": "Proses sistematis yang terbukti efektif memastikan setiap alat kesehatan mendapatkan layanan kalibrasi terbaik.",
@@ -271,6 +282,7 @@
       ]
     },
     "testimonial": {
+      "order": 12,
       "enabled": true,
       "heading": "Apa Kata Mereka",
       "description": "Dipercaya oleh ribuan fasilitas kesehatan di seluruh Indonesia.",

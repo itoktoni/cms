@@ -6,446 +6,480 @@ import homeData from '../content/pages/home.json';
 const services = await getCollection('services');
 services.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 
+// Sort sections by order
+const sortedSections = Object.entries(homeData.sections)
+  .sort((a, b) => (a[1].order ?? 99) - (b[1].order ?? 99));
+
 const { slider, stats, certifications, verification, services: servicesConfig, advantages, news, cta, clients, portfolio, process, testimonial } = homeData.sections;
 ---
 
 <BaseLayout title={homeData.title}>
-  <!-- Hero Section Fullscreen Slider -->
-  {slider.enabled && (
-    <div class="hero-main-slider">
-      <div class="hs-track">
-        {slider.items.map((slide, i) => (
-          <div class={`hs-slide ${i === 0 ? 'active' : ''}`}>
-            <div class="absolute inset-0 z-0">
-              {slide.image ? (
-                <img src={slide.image} alt={slide.badge} class="w-full h-full object-cover" />
-              ) : (
-                <div class="w-full h-full emerald-gradient"></div>
-              )}
-              <div class="absolute inset-0 bg-gradient-to-r from-background/95 via-background/60 to-transparent z-10"></div>
-            </div>
-            <div class="relative z-20 max-w-7xl mx-auto px-4 md:px-8 w-full">
-              <div class="hs-content max-w-2xl glass-card p-6 md:p-12 rounded-xl">
-                {slide.badge && (
-                  <span class="font-label-md text-primary tracking-[0.2em] uppercase mb-4 block">{slide.badge}</span>
-                )}
-                <h1 class="font-headline-xl text-headline-xl text-on-surface mb-6 leading-tight">{slide.title}</h1>
-                <p class="font-body-lg text-body-lg text-on-surface-variant mb-10">{slide.subtitle}</p>
-                <div class="flex flex-wrap gap-4">
-                  {slide.button_text && (
-                    <a href={slide.button_url || '/kontak'} class="bg-primary text-on-primary px-6 md:px-8 py-3 md:py-4 rounded-lg font-label-md text-base md:text-lg flex items-center gap-2 hover:shadow-lg transition-all group">
-                      {slide.button_text} <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                    </a>
+  {sortedSections.map(([key, section]) => {
+    if (!section.enabled) return null;
+
+    // Hero Slider
+    if (key === 'slider') {
+      return (
+        <div class="hero-main-slider">
+          <div class="hs-track">
+            {section.items.map((slide, i) => (
+              <div class={`hs-slide ${i === 0 ? 'active' : ''}`}>
+                <div class="absolute inset-0 z-0">
+                  {slide.image ? (
+                    <img src={slide.image} alt={slide.badge} class="w-full h-full object-cover" />
+                  ) : (
+                    <div class="w-full h-full emerald-gradient"></div>
                   )}
-                  {slider.items.length > 1 && (
-                    <button class="border border-outline px-6 md:px-8 py-3 md:py-4 rounded-lg font-label-md text-base md:text-lg hover:bg-surface-container transition-all">Layanan Kami</button>
-                  )}
+                  <div class="absolute inset-0 bg-gradient-to-r from-background/95 via-background/60 to-transparent z-10"></div>
                 </div>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      {slider.items.length > 1 && (
-        <>
-          <button class="hs-arrow hs-prev" aria-label="Prev"><span class="material-symbols-outlined text-on-surface">chevron_left</span></button>
-          <button class="hs-arrow hs-next" aria-label="Next"><span class="material-symbols-outlined text-on-surface">chevron_right</span></button>
-          <div class="hs-dots">
-            {slider.items.map((_, i) => (
-              <span class={`hs-dot ${i === 0 ? 'active' : ''}`} data-slide={i}></span>
-            ))}
-          </div>
-        </>
-      )}
-    </div>
-  )}
-
-  <!-- Stats -->
-  {stats.enabled && (
-    <section class="py-12 bg-white border-b border-gray-100">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-          {stats.items.map(stat => (
-            <div>
-              <div class="text-3xl md:text-4xl font-extrabold text-primary">{stat.value}</div>
-              <div class="text-sm text-gray-500 mt-1">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Certifications Section -->
-  {certifications.enabled && (
-    <section class="py-24 bg-surface-container-low">
-      <div class="max-w-7xl mx-auto px-8">
-        <div class="text-center mb-16">
-          <h2 class="font-headline-lg text-headline-lg text-on-surface">{certifications.heading}</h2>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {certifications.items.map(cert => (
-            <div class="glass-card p-8 rounded-xl flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
-              <div class="absolute inset-0 gold-shimmer opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              <div class="w-24 h-24 mb-6">
-                <div class="w-full h-full rounded-full bg-primary-container/10 flex items-center justify-center">
-                  <span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
+                <div class="relative z-20 max-w-7xl mx-auto px-4 md:px-8 w-full">
+                  <div class="hs-content max-w-2xl glass-card p-6 md:p-12 rounded-xl">
+                    {slide.badge && (
+                      <span class="font-label-md text-primary tracking-[0.2em] uppercase mb-4 block">{slide.badge}</span>
+                    )}
+                    <h1 class="font-headline-xl text-headline-xl text-on-surface mb-6 leading-tight">{slide.title}</h1>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant mb-10">{slide.subtitle}</p>
+                    <div class="flex flex-wrap gap-4">
+                      {slide.button_text && (
+                        <a href={slide.button_url || '/kontak'} class="bg-primary text-on-primary px-6 md:px-8 py-3 md:py-4 rounded-lg font-label-md text-base md:text-lg flex items-center gap-2 hover:shadow-lg transition-all group">
+                          {slide.button_text} <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </a>
+                      )}
+                      {section.items.length > 1 && (
+                        <button class="border border-outline px-6 md:px-8 py-3 md:py-4 rounded-lg font-label-md text-base md:text-lg hover:bg-surface-container transition-all">Layanan Kami</button>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <h3 class="font-headline-md text-headline-md mb-2">{cert.title}</h3>
-              <p class="text-on-surface-variant font-body-md">{cert.description}</p>
-              {cert.link_text && (
-                <div class="mt-6 text-secondary-container flex items-center gap-2 font-label-md">
-                  {cert.link_text} <span class="material-symbols-outlined text-sm">open_in_new</span>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Verification Tool -->
-  {verification.enabled && (
-    <section class="py-24 bg-[#007A4D] relative overflow-hidden">
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
-      </div>
-      <div class="max-w-4xl mx-auto px-8 relative z-10">
-        <div class="text-center mb-12">
-          <span class="font-label-md text-secondary-container tracking-widest uppercase block mb-2">{verification.badge}</span>
-          <h2 class="font-headline-lg text-headline-lg text-white">{verification.heading}</h2>
-          <p class="text-white/80 mt-4 max-w-lg mx-auto">{verification.description}</p>
-        </div>
-        <div class="glass-dark p-2 rounded-2xl flex flex-col md:flex-row items-stretch gap-2 border-white/20">
-          <div class="flex-grow flex items-center px-6 py-4 gap-4">
-            <span class="material-symbols-outlined text-secondary-container text-3xl">qr_code_scanner</span>
-            <input
-              class="w-full bg-transparent border-none text-white focus:ring-0 text-lg placeholder:text-white/40"
-              placeholder={verification.placeholder}
-              type="text"
-            />
-          </div>
-          <button class="bg-secondary-container text-on-secondary-container px-10 py-4 rounded-xl font-headline-md flex items-center justify-center gap-3 hover:bg-secondary-fixed-dim transition-all shadow-lg shadow-black/10">
-            {verification.button_text}
-          </button>
-        </div>
-        {verification.features && (
-          <div class="flex justify-center gap-8 mt-10">
-            {verification.features.map(feat => (
-              <div class="flex items-center gap-2 text-white/70 text-label-sm">
-                <span class="material-symbols-outlined text-sm text-secondary-container">{feat.icon}</span>
-                {feat.label}
               </div>
             ))}
           </div>
-        )}
-      </div>
-    </section>
-  )}
-
-  <!-- Clinical Solutions Ecosystem (Services) -->
-  {servicesConfig.enabled && (
-    <section class="py-24 bg-surface-container-low">
-      <div class="max-w-7xl mx-auto px-8">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <div class="max-w-2xl">
-            <div class="w-12 h-1 bg-secondary-container mb-6"></div>
-            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{servicesConfig.heading}</h2>
-            <p class="text-on-surface-variant text-body-lg">{servicesConfig.description}</p>
-          </div>
-          {servicesConfig.link_text && (
-            <a class="text-primary font-label-md font-bold inline-flex items-center gap-2 hover:gap-3 transition-all shrink-0" href={servicesConfig.link_url || '/layanan'}>
-              {servicesConfig.link_text} <span class="material-symbols-outlined">arrow_right_alt</span>
-            </a>
+          {section.items.length > 1 && (
+            <>
+              <button class="hs-arrow hs-prev" aria-label="Prev"><span class="material-symbols-outlined text-on-surface">chevron_left</span></button>
+              <button class="hs-arrow hs-next" aria-label="Next"><span class="material-symbols-outlined text-on-surface">chevron_right</span></button>
+              <div class="hs-dots">
+                {section.items.map((_, i) => (
+                  <span class={`hs-dot ${i === 0 ? 'active' : ''}`} data-slide={i}></span>
+                ))}
+              </div>
+            </>
           )}
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, idx) => {
-            const icons = ['monitor_heart', 'radiology', 'medical_services'];
-            const icon = service.data.icon || icons[idx] || 'medical_services';
-            return (
-              <a href={`/layanan/${service.id}`} class="bg-white rounded-xl p-8 border border-outline-variant/30 hover:shadow-xl transition-all group block">
-                <div class="w-14 h-14 bg-surface-container-low text-primary flex items-center justify-center rounded-lg mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors">
-                  <span class="material-symbols-outlined text-[32px]">{icon}</span>
-                </div>
-                <h3 class="font-headline-md text-headline-md text-on-surface mb-4">{service.data.title}</h3>
-                <p class="text-on-surface-variant text-[15px] mb-6 leading-relaxed">{service.data.description}</p>
-                <div class="h-px bg-outline-variant/30 mb-6"></div>
-                <ul class="space-y-3 font-body-md text-[13px] text-outline">
-                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-secondary-container rounded-full"></span> Informasi Lengkap</li>
-                  <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-secondary-container rounded-full"></span> Hubungi Kami</li>
-                </ul>
-              </a>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  )}
+      );
+    }
 
-  <!-- Advantages Section (Competency Slider) -->
-  {advantages.enabled && advantages.items.length > 0 && (
-    <section class="py-32 bg-background">
-      <div class="max-w-7xl mx-auto px-8">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <div class="max-w-2xl">
-            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{advantages.heading}</h2>
-            <p class="text-on-surface-variant text-body-lg">{advantages.description}</p>
+    // Stats
+    if (key === 'stats') {
+      return (
+        <section class="py-12 bg-white border-b border-gray-100">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              {section.items.map(stat => (
+                <div>
+                  <div class="text-3xl md:text-4xl font-extrabold text-primary">{stat.value}</div>
+                  <div class="text-sm text-gray-500 mt-1">{stat.label}</div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div class="cmp-nav shrink-0">
-            <button class="cmp-btn cmp-prev" aria-label="Prev"><span class="material-symbols-outlined text-on-surface">chevron_left</span></button>
-            <button class="cmp-btn cmp-next" aria-label="Next"><span class="material-symbols-outlined text-on-surface">chevron_right</span></button>
-          </div>
-        </div>
-        <div class="cmp-slid">
-          <div style="overflow:hidden;">
-            <div class="cmp-track">
-              {advantages.items.map(item => (
-                <div class="cmp-item">
-                  <div class="group rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div class="h-48 overflow-hidden relative emerald-gradient flex items-center justify-center">
-                      <span class="material-symbols-outlined text-6xl text-white/30" style="font-variation-settings: 'FILL' 1;">{item.icon}</span>
+        </section>
+      );
+    }
+
+    // Certifications
+    if (key === 'certifications') {
+      return (
+        <section class="py-24 bg-surface-container-low">
+          <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-16">
+              <h2 class="font-headline-lg text-headline-lg text-on-surface">{section.heading}</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {section.items.map(cert => (
+                <div class="glass-card p-8 rounded-xl flex flex-col items-center text-center group hover:-translate-y-2 transition-all duration-300 relative overflow-hidden">
+                  <div class="absolute inset-0 gold-shimmer opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div class="w-24 h-24 mb-6">
+                    <div class="w-full h-full rounded-full bg-primary-container/10 flex items-center justify-center">
+                      <span class="material-symbols-outlined text-4xl text-primary" style="font-variation-settings: 'FILL' 1;">verified</span>
                     </div>
-                    <div class="p-6">
-                      <div class="flex items-center gap-3 mb-3">
-                        <div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center shrink-0">
-                          <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">{item.icon}</span>
+                  </div>
+                  <h3 class="font-headline-md text-headline-md mb-2">{cert.title}</h3>
+                  <p class="text-on-surface-variant font-body-md">{cert.description}</p>
+                  {cert.link_text && (
+                    <div class="mt-6 text-secondary-container flex items-center gap-2 font-label-md">
+                      {cert.link_text} <span class="material-symbols-outlined text-sm">open_in_new</span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // Verification
+    if (key === 'verification') {
+      return (
+        <section class="py-24 bg-[#007A4D] relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+          </div>
+          <div class="max-w-4xl mx-auto px-8 relative z-10">
+            <div class="text-center mb-12">
+              <span class="font-label-md text-secondary-container tracking-widest uppercase block mb-2">{section.badge}</span>
+              <h2 class="font-headline-lg text-headline-lg text-white">{section.heading}</h2>
+              <p class="text-white/80 mt-4 max-w-lg mx-auto">{section.description}</p>
+            </div>
+            <div class="glass-dark p-2 rounded-2xl flex flex-col md:flex-row items-stretch gap-2 border-white/20">
+              <div class="flex-grow flex items-center px-6 py-4 gap-4">
+                <span class="material-symbols-outlined text-secondary-container text-3xl">qr_code_scanner</span>
+                <input
+                  class="w-full bg-transparent border-none text-white focus:ring-0 text-lg placeholder:text-white/40"
+                  placeholder={section.placeholder}
+                  type="text"
+                />
+              </div>
+              <button class="bg-secondary-container text-on-secondary-container px-10 py-4 rounded-xl font-headline-md flex items-center justify-center gap-3 hover:bg-secondary-fixed-dim transition-all shadow-lg shadow-black/10">
+                {section.button_text}
+              </button>
+            </div>
+            {section.features && (
+              <div class="flex justify-center gap-8 mt-10">
+                {section.features.map(feat => (
+                  <div class="flex items-center gap-2 text-white/70 text-label-sm">
+                    <span class="material-symbols-outlined text-sm text-secondary-container">{feat.icon}</span>
+                    {feat.label}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    }
+
+    // Services
+    if (key === 'services') {
+      return (
+        <section class="py-24 bg-surface-container-low">
+          <div class="max-w-7xl mx-auto px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+              <div class="max-w-2xl">
+                <div class="w-12 h-1 bg-secondary-container mb-6"></div>
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{section.heading}</h2>
+                <p class="text-on-surface-variant text-body-lg">{section.description}</p>
+              </div>
+              {section.link_text && (
+                <a class="text-primary font-label-md font-bold inline-flex items-center gap-2 hover:gap-3 transition-all shrink-0" href={section.link_url || '/layanan'}>
+                  {section.link_text} <span class="material-symbols-outlined">arrow_right_alt</span>
+                </a>
+              )}
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service, idx) => {
+                const icons = ['monitor_heart', 'radiology', 'medical_services'];
+                const icon = service.data.icon || icons[idx] || 'medical_services';
+                return (
+                  <a href={`/layanan/${service.id}`} class="bg-white rounded-xl p-8 border border-outline-variant/30 hover:shadow-xl transition-all group block">
+                    <div class="w-14 h-14 bg-surface-container-low text-primary flex items-center justify-center rounded-lg mb-6 group-hover:bg-primary group-hover:text-on-primary transition-colors">
+                      <span class="material-symbols-outlined text-[32px]">{icon}</span>
+                    </div>
+                    <h3 class="font-headline-md text-headline-md text-on-surface mb-4">{service.data.title}</h3>
+                    <p class="text-on-surface-variant text-[15px] mb-6 leading-relaxed">{service.data.description}</p>
+                    <div class="h-px bg-outline-variant/30 mb-6"></div>
+                    <ul class="space-y-3 font-body-md text-[13px] text-outline">
+                      <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-secondary-container rounded-full"></span> Informasi Lengkap</li>
+                      <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-secondary-container rounded-full"></span> Hubungi Kami</li>
+                    </ul>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // Advantages
+    if (key === 'advantages') {
+      return (
+        <section class="py-32 bg-background">
+          <div class="max-w-7xl mx-auto px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+              <div class="max-w-2xl">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{section.heading}</h2>
+                <p class="text-on-surface-variant text-body-lg">{section.description}</p>
+              </div>
+              <div class="cmp-nav shrink-0">
+                <button class="cmp-btn cmp-prev" aria-label="Prev"><span class="material-symbols-outlined text-on-surface">chevron_left</span></button>
+                <button class="cmp-btn cmp-next" aria-label="Next"><span class="material-symbols-outlined text-on-surface">chevron_right</span></button>
+              </div>
+            </div>
+            <div class="cmp-slid">
+              <div style="overflow:hidden;">
+                <div class="cmp-track">
+                  {section.items.map(item => (
+                    <div class="cmp-item">
+                      <div class="group rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div class="h-48 overflow-hidden relative emerald-gradient flex items-center justify-center">
+                          <span class="material-symbols-outlined text-6xl text-white/30" style="font-variation-settings: 'FILL' 1;">{item.icon}</span>
                         </div>
-                        <h4 class="font-headline-md text-headline-md group-hover:text-primary transition-colors">{item.title}</h4>
+                        <div class="p-6">
+                          <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center shrink-0">
+                              <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">{item.icon}</span>
+                            </div>
+                            <h4 class="font-headline-md text-headline-md group-hover:text-primary transition-colors">{item.title}</h4>
+                          </div>
+                          <p class="text-on-surface-variant text-sm">{item.description}</p>
+                        </div>
                       </div>
-                      <p class="text-on-surface-variant text-sm">{item.description}</p>
                     </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div class="cmp-dots">
+              {section.items.map((_, i) => (
+                <span class={`cmp-dot ${i === 0 ? 'active' : ''}`} data-group={i}></span>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // News
+    if (key === 'news') {
+      return (
+        <section class="py-24 bg-surface-container-highest">
+          <div class="max-w-7xl mx-auto px-8">
+            <div class="flex items-center gap-4 mb-12">
+              <div class="h-px bg-outline-variant flex-grow"></div>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface shrink-0 px-4">{section.heading}</h2>
+              <div class="h-px bg-outline-variant flex-grow"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
+              {section.items.map((item, i) => {
+                if (item.featured) {
+                  return (
+                    <div class="md:col-span-7 h-full relative group rounded-2xl overflow-hidden shadow-xl">
+                      <div class="w-full h-full emerald-gradient group-hover:scale-105 transition-transform duration-700"></div>
+                      <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/40 to-transparent p-12 flex flex-col justify-end">
+                        {item.badge && <span class="font-label-md text-secondary-fixed-dim mb-4">{item.badge}</span>}
+                        <h3 class="font-headline-xl text-headline-xl text-white mb-6">{item.title}</h3>
+                        <a href={item.link_url || '/artikel'} class="text-white flex items-center gap-2 font-label-md hover:translate-x-2 transition-transform w-fit">
+                          {item.link_text} <span class="material-symbols-outlined">north_east</span>
+                        </a>
+                      </div>
+                    </div>
+                  );
+                } else {
+                  const isPrimary = item.style === 'primary';
+                  const isGlass = item.style === 'glass';
+                  return (
+                    <div class="md:col-span-5">
+                      <div class={`grid grid-rows-2 gap-6 h-full`}>
+                        <div class={`${isPrimary ? 'bg-primary text-on-primary border border-primary-container' : isGlass ? 'glass-card' : 'glass-card'} p-10 rounded-2xl flex flex-col justify-between group cursor-pointer hover:shadow-2xl transition-all`}>
+                          <div>
+                            <span class={`material-symbols-outlined text-4xl mb-4 ${isPrimary ? 'text-secondary-container' : 'text-primary'}`}>{item.icon}</span>
+                            <h4 class={`font-headline-md text-headline-md mb-4 ${isPrimary ? '' : 'text-on-surface'}`}>{item.title}</h4>
+                            <p class={`line-clamp-2 ${isPrimary ? 'opacity-80' : 'text-on-surface-variant'}`}>{item.description}</p>
+                          </div>
+                          <span class={`font-label-md mt-6 group-hover:translate-x-2 transition-transform flex items-center gap-2 ${isPrimary ? '' : 'text-primary'}`}>
+                            {item.link_text} <span class="material-symbols-outlined">arrow_right_alt</span>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+              })}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // CTA
+    if (key === 'cta') {
+      return (
+        <section class="py-24 relative overflow-hidden bg-white">
+          <div class="absolute top-0 right-0 w-1/3 h-full emerald-gradient clip-path-slant opacity-10"></div>
+          <div class="max-w-7xl mx-auto px-8 relative z-10 flex flex-col md:flex-row items-center gap-16">
+            <div class="flex-grow">
+              <h2 class="font-headline-xl text-headline-xl mb-6">{section.heading}</h2>
+              <p class="text-body-lg text-on-surface-variant max-w-xl mb-10">{section.description}</p>
+              <div class="flex flex-wrap gap-4">
+                <a href={section.button_url || '/kontak'} class="bg-primary text-on-primary px-10 py-5 rounded-xl font-headline-md text-lg shadow-xl shadow-primary/20 hover:scale-105 transition-all">{section.button_text}</a>
+                {section.button_secondary_text && (
+                  <a href={section.button_secondary_url || '/layanan'} class="bg-white border-2 border-primary text-primary px-10 py-5 rounded-xl font-headline-md text-lg hover:bg-surface-container transition-all">{section.button_secondary_text}</a>
+                )}
+              </div>
+            </div>
+            <div class="w-full md:w-1/3 glass-card p-1 rounded-2xl rotate-3 shadow-2xl">
+              <div class="w-full aspect-[3/4] emerald-gradient rounded-xl flex items-center justify-center">
+                <span class="material-symbols-outlined text-8xl text-white/20">description</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // Clients
+    if (key === 'clients') {
+      return (
+        <section class="py-24 bg-surface-container-low">
+          <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-12">
+              {section.badge && <span class="font-label-sm text-primary tracking-[0.25em] uppercase mb-2 block">{section.badge}</span>}
+              <h2 class="font-headline-md text-headline-md text-on-surface">{section.heading}</h2>
+            </div>
+            <div class="client-slid">
+              <div class="cl-track">
+                {section.items.map(client => (
+                  <div class="cl-item">
+                    <div class="cl-card">
+                      <span class="material-symbols-outlined text-4xl text-primary/40 mb-2">{client.icon}</span>
+                      <span class="font-label-md text-on-surface-variant text-center">{client.name}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button class="cl-btn cl-prev" aria-label="Prev"><span class="material-symbols-outlined text-on-surface text-[20px]">chevron_left</span></button>
+              <button class="cl-btn cl-next" aria-label="Next"><span class="material-symbols-outlined text-on-surface text-[20px]">chevron_right</span></button>
+            </div>
+            <div class="cl-dots">
+              {Array.from({ length: Math.ceil(section.items.length / 5) }).map((_, i) => (
+                <span class={`cl-dot ${i === 0 ? 'active' : ''}`} data-group={i}></span>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // Portfolio
+    if (key === 'portfolio') {
+      return (
+        <section class="py-24 bg-surface-container-low">
+          <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-16">
+              <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{section.heading}</h2>
+              <p class="text-on-surface-variant text-body-lg max-w-2xl mx-auto">{section.description}</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {section.items.map(item => (
+                <div class="bg-white rounded-xl overflow-hidden border border-outline-variant/30 hover:shadow-xl transition-all group">
+                  <div class="h-48 emerald-gradient relative overflow-hidden">
+                    {item.image ? (
+                      <img src={item.image} alt={item.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    ) : (
+                      <div class="w-full h-full flex items-center justify-center">
+                        <span class="material-symbols-outlined text-6xl text-white/20">case_study</span>
+                      </div>
+                    )}
+                    {item.industry && (
+                      <span class="absolute top-4 left-4 bg-white/90 text-primary text-xs font-bold px-3 py-1 rounded-full">{item.industry}</span>
+                    )}
+                  </div>
+                  <div class="p-6">
+                    <p class="text-primary text-sm font-semibold mb-1">{item.client}</p>
+                    <h3 class="font-headline-md text-headline-md mb-3">{item.title}</h3>
+                    <p class="text-on-surface-variant text-sm mb-4 line-clamp-3">{item.description}</p>
+                    {item.stats && item.stats.length > 0 && (
+                      <div class="grid grid-cols-3 gap-2 mb-4">
+                        {item.stats.map(stat => (
+                          <div class="text-center bg-surface-container-low rounded-lg p-2">
+                            <div class="text-primary font-bold text-sm">{stat.value}</div>
+                            <div class="text-outline text-[10px]">{stat.label}</div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {item.link_text && (
+                      <a href="#" class="text-primary font-label-md text-sm flex items-center gap-1 hover:gap-2 transition-all">
+                        {item.link_text} <span class="material-symbols-outlined text-sm">arrow_right_alt</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               ))}
             </div>
           </div>
-        </div>
-        <div class="cmp-dots">
-          {advantages.items.map((_, i) => (
-            <span class={`cmp-dot ${i === 0 ? 'active' : ''}`} data-group={i}></span>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
+        </section>
+      );
+    }
 
-  <!-- News Section (Bento Grid) -->
-  {news.enabled && news.items.length > 0 && (
-    <section class="py-24 bg-surface-container-highest">
-      <div class="max-w-7xl mx-auto px-8">
-        <div class="flex items-center gap-4 mb-12">
-          <div class="h-px bg-outline-variant flex-grow"></div>
-          <h2 class="font-headline-lg text-headline-lg text-on-surface shrink-0 px-4">{news.heading}</h2>
-          <div class="h-px bg-outline-variant flex-grow"></div>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
-          {news.items.map((item, i) => {
-            if (item.featured) {
-              return (
-                <div class="md:col-span-7 h-full relative group rounded-2xl overflow-hidden shadow-xl">
-                  <div class="w-full h-full emerald-gradient group-hover:scale-105 transition-transform duration-700"></div>
-                  <div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/90 via-inverse-surface/40 to-transparent p-12 flex flex-col justify-end">
-                    {item.badge && <span class="font-label-md text-secondary-fixed-dim mb-4">{item.badge}</span>}
-                    <h3 class="font-headline-xl text-headline-xl text-white mb-6">{item.title}</h3>
-                    <a href={item.link_url || '/artikel'} class="text-white flex items-center gap-2 font-label-md hover:translate-x-2 transition-transform w-fit">
-                      {item.link_text} <span class="material-symbols-outlined">north_east</span>
-                    </a>
-                  </div>
-                </div>
-              );
-            } else {
-              const isPrimary = item.style === 'primary';
-              const isGlass = item.style === 'glass';
-              return (
-                <div class="md:col-span-5">
-                  <div class={`grid grid-rows-2 gap-6 h-full`}>
-                    <div class={`${isPrimary ? 'bg-primary text-on-primary border border-primary-container' : isGlass ? 'glass-card' : 'glass-card'} p-10 rounded-2xl flex flex-col justify-between group cursor-pointer hover:shadow-2xl transition-all`}>
-                      <div>
-                        <span class={`material-symbols-outlined text-4xl mb-4 ${isPrimary ? 'text-secondary-container' : 'text-primary'}`}>{item.icon}</span>
-                        <h4 class={`font-headline-md text-headline-md mb-4 ${isPrimary ? '' : 'text-on-surface'}`}>{item.title}</h4>
-                        <p class={`line-clamp-2 ${isPrimary ? 'opacity-80' : 'text-on-surface-variant'}`}>{item.description}</p>
-                      </div>
-                      <span class={`font-label-md mt-6 group-hover:translate-x-2 transition-transform flex items-center gap-2 ${isPrimary ? '' : 'text-primary'}`}>
-                        {item.link_text} <span class="material-symbols-outlined">arrow_right_alt</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-          })}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- CTA Section -->
-  {cta.enabled && (
-    <section class="py-24 relative overflow-hidden bg-white">
-      <div class="absolute top-0 right-0 w-1/3 h-full emerald-gradient clip-path-slant opacity-10"></div>
-      <div class="max-w-7xl mx-auto px-8 relative z-10 flex flex-col md:flex-row items-center gap-16">
-        <div class="flex-grow">
-          <h2 class="font-headline-xl text-headline-xl mb-6">{cta.heading}</h2>
-          <p class="text-body-lg text-on-surface-variant max-w-xl mb-10">{cta.description}</p>
-          <div class="flex flex-wrap gap-4">
-            <a href={cta.button_url || '/kontak'} class="bg-primary text-on-primary px-10 py-5 rounded-xl font-headline-md text-lg shadow-xl shadow-primary/20 hover:scale-105 transition-all">{cta.button_text}</a>
-            {cta.button_secondary_text && (
-              <a href={cta.button_secondary_url || '/layanan'} class="bg-white border-2 border-primary text-primary px-10 py-5 rounded-xl font-headline-md text-lg hover:bg-surface-container transition-all">{cta.button_secondary_text}</a>
-            )}
-          </div>
-        </div>
-        <div class="w-full md:w-1/3 glass-card p-1 rounded-2xl rotate-3 shadow-2xl">
-          <div class="w-full aspect-[3/4] emerald-gradient rounded-xl flex items-center justify-center">
-            <span class="material-symbols-outlined text-8xl text-white/20">description</span>
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Clients Section -->
-  {clients.enabled && clients.items.length > 0 && (
-    <section class="py-24 bg-surface-container-low">
-      <div class="max-w-7xl mx-auto px-8">
-        <div class="text-center mb-12">
-          {clients.badge && <span class="font-label-sm text-primary tracking-[0.25em] uppercase mb-2 block">{clients.badge}</span>}
-          <h2 class="font-headline-md text-headline-md text-on-surface">{clients.heading}</h2>
-        </div>
-        <div class="client-slid">
-          <div class="cl-track">
-            {clients.items.map(client => (
-              <div class="cl-item">
-                <div class="cl-card">
-                  <span class="material-symbols-outlined text-4xl text-primary/40 mb-2">{client.icon}</span>
-                  <span class="font-label-md text-on-surface-variant text-center">{client.name}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-          <button class="cl-btn cl-prev" aria-label="Prev"><span class="material-symbols-outlined text-on-surface text-[20px]">chevron_left</span></button>
-          <button class="cl-btn cl-next" aria-label="Next"><span class="material-symbols-outlined text-on-surface text-[20px]">chevron_right</span></button>
-        </div>
-        <div class="cl-dots">
-          {Array.from({ length: Math.ceil(clients.items.length / 5) }).map((_, i) => (
-            <span class={`cl-dot ${i === 0 ? 'active' : ''}`} data-group={i}></span>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Portfolio / Case Studies -->
-  {portfolio && portfolio.enabled && portfolio.items && portfolio.items.length > 0 && (
-    <section class="py-24 bg-surface-container-low">
-      <div class="max-w-7xl mx-auto px-8">
-        <div class="text-center mb-16">
-          <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{portfolio.heading}</h2>
-          <p class="text-on-surface-variant text-body-lg max-w-2xl mx-auto">{portfolio.description}</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {portfolio.items.map(item => (
-            <div class="bg-white rounded-xl overflow-hidden border border-outline-variant/30 hover:shadow-xl transition-all group">
-              <div class="h-48 emerald-gradient relative overflow-hidden">
-                {item.image ? (
-                  <img src={item.image} alt={item.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                ) : (
-                  <div class="w-full h-full flex items-center justify-center">
-                    <span class="material-symbols-outlined text-6xl text-white/20">case_study</span>
-                  </div>
-                )}
-                {item.industry && (
-                  <span class="absolute top-4 left-4 bg-white/90 text-primary text-xs font-bold px-3 py-1 rounded-full">{item.industry}</span>
-                )}
-              </div>
-              <div class="p-6">
-                <p class="text-primary text-sm font-semibold mb-1">{item.client}</p>
-                <h3 class="font-headline-md text-headline-md mb-3">{item.title}</h3>
-                <p class="text-on-surface-variant text-sm mb-4 line-clamp-3">{item.description}</p>
-                {item.stats && item.stats.length > 0 && (
-                  <div class="grid grid-cols-3 gap-2 mb-4">
-                    {item.stats.map(stat => (
-                      <div class="text-center bg-surface-container-low rounded-lg p-2">
-                        <div class="text-primary font-bold text-sm">{stat.value}</div>
-                        <div class="text-outline text-[10px]">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {item.link_text && (
-                  <a href="#" class="text-primary font-label-md text-sm flex items-center gap-1 hover:gap-2 transition-all">
-                    {item.link_text} <span class="material-symbols-outlined text-sm">arrow_right_alt</span>
-                  </a>
-                )}
-              </div>
+    // Process
+    if (key === 'process') {
+      return (
+        <section class="py-24 bg-background">
+          <div class="max-w-7xl mx-auto px-8">
+            <div class="text-center mb-16">
+              <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{section.heading}</h2>
+              <p class="text-on-surface-variant text-body-lg max-w-2xl mx-auto">{section.description}</p>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Process / How We Work -->
-  {process && process.enabled && process.steps && process.steps.length > 0 && (
-    <section class="py-24 bg-background">
-      <div class="max-w-7xl mx-auto px-8">
-        <div class="text-center mb-16">
-          <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{process.heading}</h2>
-          <p class="text-on-surface-variant text-body-lg max-w-2xl mx-auto">{process.description}</p>
-        </div>
-        <div class="relative">
-          <div class="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-outline-variant/30 -translate-y-1/2"></div>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {process.steps.map((step, i) => (
-              <div class="relative text-center group">
-                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-lg text-xl shadow-lg group-hover:scale-110 transition-transform z-10 relative">
-                  {step.number}
-                </div>
-                <h4 class="font-headline-md text-headline-md mb-2">{step.title}</h4>
-                <p class="text-on-surface-variant text-sm">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
-
-  <!-- Testimonial -->
-  {testimonial && testimonial.enabled && testimonial.items && testimonial.items.length > 0 && (
-    <section class="py-24 bg-[#007A4D] relative overflow-hidden">
-      <div class="absolute inset-0 opacity-10">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
-        <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
-      </div>
-      <div class="max-w-7xl mx-auto px-8 relative z-10">
-        <div class="text-center mb-16">
-          <h2 class="font-headline-lg text-headline-lg text-white mb-4">{testimonial.heading}</h2>
-          <p class="text-white/80 text-body-lg max-w-2xl mx-auto">{testimonial.description}</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonial.items.map(item => (
-            <div class="glass-dark p-8 rounded-2xl border-white/20 hover:-translate-y-2 transition-all duration-300">
-              <div class="flex gap-1 mb-4">
-                {Array.from({ length: item.rating || 5 }).map(() => (
-                  <span class="material-symbols-outlined text-secondary-container text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            <div class="relative">
+              <div class="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-outline-variant/30 -translate-y-1/2"></div>
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                {section.steps.map((step, i) => (
+                  <div class="relative text-center group">
+                    <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary text-on-primary flex items-center justify-center font-headline-lg text-xl shadow-lg group-hover:scale-110 transition-transform z-10 relative">
+                      {step.number}
+                    </div>
+                    <h4 class="font-headline-md text-headline-md mb-2">{step.title}</h4>
+                    <p class="text-on-surface-variant text-sm">{step.description}</p>
+                  </div>
                 ))}
               </div>
-              <p class="text-white/90 text-body-md mb-6 italic leading-relaxed">"{item.quote}"</p>
-              <div class="border-t border-white/20 pt-4">
-                <p class="text-white font-label-md">{item.author}</p>
-                <p class="text-white/60 text-sm">{item.role}</p>
-                <p class="text-secondary-container text-sm font-semibold">{item.company}</p>
-              </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
+          </div>
+        </section>
+      );
+    }
+
+    // Testimonial
+    if (key === 'testimonial') {
+      return (
+        <section class="py-24 bg-[#007A4D] relative overflow-hidden">
+          <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+          </div>
+          <div class="max-w-7xl mx-auto px-8 relative z-10">
+            <div class="text-center mb-16">
+              <h2 class="font-headline-lg text-headline-lg text-white mb-4">{section.heading}</h2>
+              <p class="text-white/80 text-body-lg max-w-2xl mx-auto">{section.description}</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {section.items.map(item => (
+                <div class="glass-dark p-8 rounded-2xl border-white/20 hover:-translate-y-2 transition-all duration-300">
+                  <div class="flex gap-1 mb-4">
+                    {Array.from({ length: item.rating || 5 }).map(() => (
+                      <span class="material-symbols-outlined text-secondary-container text-xl" style="font-variation-settings: 'FILL' 1;">star</span>
+                    ))}
+                  </div>
+                  <p class="text-white/90 text-body-md mb-6 italic leading-relaxed">"{item.quote}"</p>
+                  <div class="border-t border-white/20 pt-4">
+                    <p class="text-white font-label-md">{item.author}</p>
+                    <p class="text-white/60 text-sm">{item.role}</p>
+                    <p class="text-secondary-container text-sm font-semibold">{item.company}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    return null;
+  })}
 
   <!-- Slider Script -->
   <script>
