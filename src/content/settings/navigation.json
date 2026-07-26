@@ -2,6 +2,7 @@
   "items": [
     { "label": "Beranda", "url": "/", "highlight": false },
     { "label": "Layanan", "url": "/layanan", "highlight": false },
+    { "label": "Produk", "url": "/produk", "highlight": false },
     { "label": "Tentang Kami", "url": "/tentang", "highlight": false },
     { "label": "Artikel", "url": "/artikel", "highlight": false },
     { "label": "Hubungi Kami", "url": "/kontak", "highlight": true }

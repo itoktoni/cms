@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import productsData from '../../content/pages/products.json';
+
+const allProducts = await getCollection('products');
+
+const sections = productsData.sections
+  .filter(s => s.enabled)
+  .sort((a, b) => a.order - b.order);
+
+function getProductsForSection(sectionHeading: string) {
+  return allProducts
+    .filter(p => p.data.section === sectionHeading)
+    .sort((a, b) => a.data.order - b.data.order);
+}
+---
+
+<BaseLayout title={productsData.title}>
+  <!-- Hero Section -->
+  <section class="py-24 bg-[#007A4D] relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary-container rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-8 relative z-10">
+      <div class="text-center">
+        <h1 class="font-headline-xl text-headline-xl text-white mb-6">Produk Kami</h1>
+        <p class="text-white/80 text-body-lg max-w-2xl mx-auto">
+          Peralatan medis berkualitas tinggi untuk fasilitas kesehatan modern.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sections with Products -->
+  {sections.map(section => {
+    const sectionProducts = getProductsForSection(section.heading);
+    if (sectionProducts.length === 0) return null;
+    
+    return (
+      <section class="py-24 bg-surface-container-low">
+        <div class="max-w-7xl mx-auto px-8">
+          <div class="mb-12">
+            <div class="w-12 h-1 bg-secondary-container mb-6"></div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">{section.heading}</h2>
+            <p class="text-on-surface-variant text-body-lg max-w-2xl">{section.description}</p>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {sectionProducts.map(product => (
+              <a href={`/produk/${product.id}`} class="bg-white rounded-xl overflow-hidden border border-outline-variant/30 hover:shadow-xl transition-all group block">
+                <div class="h-48 emerald-gradient relative overflow-hidden">
+                  {product.data.image ? (
+                    <img src={product.data.image} alt={product.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  ) : (
+                    <div class="w-full h-full flex items-center justify-center">
+                      <span class="material-symbols-outlined text-6xl text-white/20">inventory_2</span>
+                    </div>
+                  )}
+                  <span class="absolute top-4 left-4 bg-white/90 text-primary text-xs font-bold px-3 py-1 rounded-full">{product.data.category}</span>
+                </div>
+                <div class="p-6">
+                  <h3 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">{product.data.title}</h3>
+                  <p class="text-on-surface-variant text-sm mb-4 line-clamp-2">{product.data.description}</p>
+                  <div class="flex items-center justify-between">
+                    <span class="text-primary font-bold text-sm">{product.data.price}</span>
+                    <span class="text-primary font-label-md text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
+                      Lihat Detail <span class="material-symbols-outlined text-sm">arrow_right_alt</span>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+</BaseLayout>

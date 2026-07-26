@@ -1,0 +1,23 @@
+{
+  "title": "Produk",
+  "sections": [
+    {
+      "order": 1,
+      "enabled": true,
+      "heading": "Alat Diagnostik",
+      "description": "Peralatan diagnostik medis untuk pemeriksaan dan monitoring pasien."
+    },
+    {
+      "order": 2,
+      "enabled": true,
+      "heading": "Alat Bedah",
+      "description": "Peralatan bedah presisi tinggi untuk prosedur medis."
+    },
+    {
+      "order": 3,
+      "enabled": true,
+      "heading": "Alat Laboratorium",
+      "description": "Peralatan laboratorium untuk analisis dan pengujian sample."
+    }
+  ]
+}
