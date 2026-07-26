@@ -1,9 +1,8 @@
 {
   "title": "Beranda",
-  "sections": {
-    "slider": {
-      "enabled": true,
-      "order": 1,
+  "sections": [
+    {
+      "key": "slider",
       "items": [
         {
           "title": "Ketelitian dalam Setiap Pengukuran",
@@ -31,9 +30,8 @@
         }
       ]
     },
-    "stats": {
-      "enabled": false,
-      "order": 2,
+    {
+      "key": "stats",
       "items": [
         { "value": "500+", "label": "Klien Aktif" },
         { "value": "15+", "label": "Tahun Pengalaman" },
@@ -41,9 +39,8 @@
         { "value": "50+", "label": "Teknisi Tersertifikasi" }
       ]
     },
-    "certifications": {
-      "enabled": false,
-      "order": 3,
+    {
+      "key": "certifications",
       "heading": "Standar Kualitas Kami",
       "items": [
         {
@@ -66,9 +63,8 @@
         }
       ]
     },
-    "verification": {
-      "enabled": false,
-      "order": 4,
+    {
+      "key": "verification",
       "badge": "Otoritas Sertifikat",
       "heading": "Portal Verifikasi Sertifikat",
       "description": "Verifikasi keaslian sertifikat kalibrasi alat kesehatan Anda menggunakan database akreditasi kami yang terintegrasi.",
@@ -80,17 +76,15 @@
         { "icon": "account_balance", "label": "Terakreditasi KAN" }
       ]
     },
-    "services": {
-      "enabled": false,
-      "order": 5,
+    {
+      "key": "services",
       "heading": "Pelayanan Kami",
       "description": "Solusi teknis terdepan untuk fasilitas kesehatan modern, memastikan setiap alat diagnostik beroperasi dalam batas presisi yang ketat.",
       "link_text": "Semua Layanan",
       "link_url": "/layanan"
     },
-    "advantages": {
-      "enabled": false,
-      "order": 6,
+    {
+      "key": "advantages",
       "heading": "Keunggulan Teknis Kami",
       "description": "Lebih dari sekadar kalibrasi, kami menyediakan jaminan teknis menyeluruh untuk lingkungan medis paling kritis.",
       "items": [
@@ -120,9 +114,8 @@
         }
       ]
     },
-    "news": {
-      "enabled": false,
-      "order": 7,
+    {
+      "key": "news",
       "heading": "Berita & Informasi",
       "items": [
         {
@@ -158,9 +151,8 @@
         }
       ]
     },
-    "cta": {
-      "enabled": true,
-      "order": 8,
+    {
+      "key": "cta",
       "heading": "Tingkatkan Keandalan Fasilitas Anda",
       "description": "Bekerja sama dengan ECM untuk audit teknis dan siklus kalibrasi yang menjamin ketersediaan alat dan ketelitian maksimal.",
       "button_text": "Konsultasi Sekarang",
@@ -168,9 +160,8 @@
       "button_secondary_text": "Lihat Katalog Layanan",
       "button_secondary_url": "/layanan"
     },
-    "clients": {
-      "enabled": false,
-      "order": 9,
+    {
+      "key": "clients",
       "heading": "Dipercaya oleh Institusi Terkemuka",
       "badge": "Daftar Klien Kami",
       "items": [
@@ -186,9 +177,8 @@
         { "name": "Medistra Hospital", "icon": "health_and_safety" }
       ]
     },
-    "portfolio": {
-      "enabled": false,
-      "order": 10,
+    {
+      "key": "portfolio",
       "heading": "Kisah Sukses Klien Kami",
       "description": "Bukti nyata bagaimana solusi kalibrasi ECM membantu fasilitas kesehatan meningkatkan akurasi dan efisiensi operasional.",
       "items": [
@@ -233,9 +223,8 @@
         }
       ]
     },
-    "process": {
-      "enabled": false,
-      "order": 11,
+    {
+      "key": "process",
       "heading": "Bagaimana Kami Bekerja",
       "description": "Proses sistematis yang terbukti efektif memastikan setiap alat kesehatan mendapatkan layanan kalibrasi terbaik.",
       "steps": [
@@ -281,9 +270,8 @@
         }
       ]
     },
-    "testimonial": {
-      "enabled": true,
-      "order": 12,
+    {
+      "key": "testimonial",
       "heading": "Apa Kata Mereka",
       "description": "Dipercaya oleh ribuan fasilitas kesehatan di seluruh Indonesia.",
       "items": [
@@ -310,5 +298,5 @@
         }
       ]
     }
-  }
+  ]
 }
