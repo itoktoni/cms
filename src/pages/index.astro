@@ -6,16 +6,17 @@ import homeData from '../content/pages/home.json';
 const services = await getCollection('services');
 services.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
 
-// Sort sections by order
-const sortedSections = Object.entries(homeData.sections)
-  .sort((a, b) => (a[1].order ?? 99) - (b[1].order ?? 99));
+// Use sections in JSON array order (drag-and-drop sort from CMS)
+const sections = homeData.sections;
 
-const { slider, stats, certifications, verification, services: servicesConfig, advantages, news, cta, clients, portfolio, process, testimonial } = homeData.sections;
+const findSection = (key) => sections.find(s => s.key === key);
+const { slider, stats, certifications, verification, services: servicesConfig, advantages, news, cta, clients, portfolio, process, testimonial } = Object.fromEntries(sections.map(s => [s.key, s]));
 ---
 
 <BaseLayout title={homeData.title}>
-  {sortedSections.map(([key, section]) => {
+  {sections.map((section) => {
     if (!section.enabled) return null;
+    const key = section.key;
 
     // Hero Slider
     if (key === 'slider') {
