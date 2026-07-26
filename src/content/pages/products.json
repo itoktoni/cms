@@ -5,19 +5,157 @@
       "order": 1,
       "enabled": true,
       "heading": "Alat Diagnostik",
-      "description": "Peralatan diagnostik medis untuk pemeriksaan dan monitoring pasien."
+      "description": "Peralatan diagnostik medis untuk pemeriksaan dan monitoring pasien.",
+      "products": [
+        {
+          "slug": "ecg-monitor-pro",
+          "order": 1,
+          "title": "ECG Monitor Pro",
+          "description": "Monitor elektrokardiografi 12-lead dengan layar sentuh HD untuk diagnosis gangguan irama jantung.",
+          "image": "",
+          "price": "Hubungi Kami",
+          "category": "Monitoring",
+          "specs": [
+            { "label": "Leads", "value": "12-Lead" },
+            { "label": "Layar", "value": "10.1 inch Touchscreen" },
+            { "label": "Resolusi", "value": "1280x800 pixel" },
+            { "label": "Battery", "value": "8 jam operasi" }
+          ],
+          "features": [
+            "Auto-analysis gangguan irama",
+            "Cetak laporan A4",
+            "Export data ke EMR",
+            "Alarm parametrik"
+          ],
+          "content": "## Fitur Utama\n\nECG Monitor Pro adalah perangkat elektrokardiografi canggih dengan 12-lead yang dirancang untuk diagnosis gangguan irama jantung secara akurat. Dilengkapi layar sentuh HD 10.1 inch dengan interface intuitif.\n\n## Keunggulan\n\n- **Auto-Diagnosis**: Sistem AI yang menganalisis gangguan irama jantung secara otomatis\n- **Display High-Resolution**: Layar sentuh HD dengan warna vivid\n- **Portabilitas**: Ringan dan mudah dipindahkan\n- **Konektivitas**: WiFi, Bluetooth, USB, LAN"
+        },
+        {
+          "slug": "ultrasound-system-x500",
+          "order": 2,
+          "title": "Ultrasound System X500",
+          "description": "Mesin ultrasonografi multi-purpose dengan teknologi AI untuk imaging diagnostik berkualitas tinggi.",
+          "image": "",
+          "price": "Hubungi Kami",
+          "category": "Imaging",
+          "specs": [
+            { "label": "Probe", "value": "Convex, Linear, Phased Array" },
+            { "label": "Layar", "value": "21.5 inch LED" },
+            { "label": "Frame Rate", "value": "Up to 1000 fps" },
+            { "label": "Modes", "value": "B, M, PW, CW, Color, Power" }
+          ],
+          "features": [
+            "AI-assisted measurement",
+            "3D/4D imaging",
+            "TCE (Tissue Characterization)",
+            "DICOM connectivity"
+          ],
+          "content": "## Fitur Utama\n\nUltrasound System X500 adalah solusi imaging lengkap untuk berbagai kebutuhan diagnostik. Dilengkapi dengan multiple probe support dan teknologi AI untuk membantu proses pemeriksaan.\n\n## Keunggulan\n\n- **Teknologi AI**: Bantuan pengukuran otomatis untuk meningkatkan akurasi\n- **Multi-Probe**: Mendukung berbagai jenis probe untuk aplikasi berbeda\n- **Ergonomis**: Desain yang nyaman untuk penggunaan jangka panjang"
+        }
+      ]
     },
     {
       "order": 2,
       "enabled": true,
       "heading": "Alat Bedah",
-      "description": "Peralatan bedah presisi tinggi untuk prosedur medis."
+      "description": "Peralatan bedah presisi tinggi untuk prosedur medis.",
+      "products": [
+        {
+          "slug": "laser-bedah-co2",
+          "order": 1,
+          "title": "Laser Bedah CO2",
+          "description": "Laser CO2 untuk prosedur bedah presisi tinggi dengan kontrol kedalaman penetrasi.",
+          "image": "",
+          "price": "Hubungi Kami",
+          "category": "Laser",
+          "specs": [
+            { "label": "Wavelength", "value": "10600 nm" },
+            { "label": "Power", "value": "0.1 - 30 Watt" },
+            { "label": "Spot Size", "value": "0.2 - 2 mm" },
+            { "label": "Cooling", "value": "Air cooled" }
+          ],
+          "features": [
+            "Pulse mode & Continuous mode",
+            "Articulating arm delivery",
+            "Microscope interface",
+            "Smoke evacuator compatible"
+          ],
+          "content": "## Fitur Utama\n\nLaser Bedah CO2 dirancang untuk prosedur bedah presisi tinggi dengan penetrasi yang terkontrol. Ideal untuk bedah umum, bedah plastik, dan prosedur dermatologi.\n\n## Keunggulan\n\n- **Presisi Tinggi**: Kontrol kedalaman penetrasi yang akurat\n- **Minimal Invasif**: Mengurangi trauma jaringan\n- **Cepat**: Waktu penyembuhan lebih singkat\n- **Serbaguna**: Multiple aplikasi bedah"
+        },
+        {
+          "slug": "electrosurgical-unit-es200",
+          "order": 2,
+          "title": "Electrosurgical Unit ES-200",
+          "description": "Unit elektrokauter multipurpose dengan teknologi bipolar dan monopolar untuk bedah modern.",
+          "image": "",
+          "price": "Hubungi Kami",
+          "category": "Elektrokauter",
+          "specs": [
+            { "label": "Modes", "value": "Monopolar, Bipolar, Forced Coag" },
+            { "label": "Power Output", "value": "1 - 400 Watt" },
+            { "label": "Frequency", "value": "350 - 500 kHz" },
+            { "label": "Safety", "value": "REM Pad Monitoring" }
+          ],
+          "features": [
+            "Auto-stop & Auto-start mode",
+            "Digital power adjustment",
+            "Smoke evacuation system",
+            "Memory preset modes"
+          ],
+          "content": "## Fitur Utama\n\nElectrosurgical Unit ES-200 adalah unit elektrokauter canggih dengan multiple mode operasi untuk berbagai prosedur bedah. Dilengkapi sistem keamanan REM (Return Electrode Monitoring).\n\n## Keunggulan\n\n- **Multipurpose**: Cocok untuk berbagai jenis bedah\n- **Aman**: Sistem REM untuk deteksi plate yang buruk\n- **Digital**: Kontrol presisi via touchscreen\n- **Efisien**: Hemat energi dengan mode eco"
+        }
+      ]
     },
     {
       "order": 3,
       "enabled": true,
       "heading": "Alat Laboratorium",
-      "description": "Peralatan laboratorium untuk analisis dan pengujian sample."
+      "description": "Peralatan laboratorium untuk analisis dan pengujian sample.",
+      "products": [
+        {
+          "slug": "chemistry-analyzer-ca600",
+          "order": 1,
+          "title": "Chemistry Analyzer CA-600",
+          "description": "Analisis kimia darah otomatis dengan kapasitas tinggi untuk laboratorium klinik.",
+          "image": "",
+          "price": "Hubungi Kami",
+          "category": "Analitik",
+          "specs": [
+            { "label": "Throughput", "value": "600 tes/jam" },
+            { "label": "Sample", "value": "Up to 1200" },
+            { "label": "Reagents", "value": "Up to 48 posisi" },
+            { "label": "Wavelength", "value": "340 - 800 nm" }
+          ],
+          "features": [
+            "Direct blood sampling (capillary)",
+            "Emergency sample priority",
+            "Automatic dilution",
+            "LIS connectivity"
+          ],
+          "content": "## Fitur Utama\n\nChemistry Analyzer CA-600 dirancang untuk laboratorium klinik dengan volume sample tinggi. Kapasitas 600 tes/jam dengan sistem reagen on-board.\n\n## Keunggulan\n\n- **High Throughput**: Memproses banyak sample dalam waktu singkat\n- **Otomatis**: Minim intervensi operator\n- **Akurat**: Teknologi kolorimetri presisi tinggi\n- **Integrated**: Terhubung langsung ke LIS"
+        },
+        {
+          "slug": "centrifuge-high-speed-5000",
+          "order": 2,
+          "title": "Centrifuge High-Speed 5000",
+          "description": "Sentrifuge kecepatan tinggi untuk pemisahan sample darah dan cairan biologis lainnya.",
+          "image": "",
+          "price": "Hubungi Kami",
+          "category": "Pemisahan",
+          "specs": [
+            { "label": "Max Speed", "value": "5000 RPM" },
+            { "label": "RCF", "value": "Up to 4427 x g" },
+            { "label": "Capacity", "value": "6 x 50 mL" },
+            { "label": "Timer", "value": "1 - 99 menit" }
+          ],
+          "features": [
+            "Brushless motor",
+            "Soft brake system",
+            "Safety lid lock",
+            "Noise level < 56 dB"
+          ],
+          "content": "## Fitur Utama\n\nSentrifuge kecepatan tinggi untuk laboratorium dengan desain compact dan motor brushless untuk operasi yang stabil dan tahan lama.\n\n## Keunggulan\n\n- **Compact**: Desain hemat ruangan\n- **Sunyi**: Noise level rendah < 56 dB\n- **Aman**: Sistem keselamatan berlapis\n- **Tahan Lama**: Motor brushless tanpa perawatan"
+        }
+      ]
     }
   ]
 }
